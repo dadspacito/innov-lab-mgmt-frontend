@@ -1,7 +1,10 @@
 import React from "react";
 import { TextField, Button, Box, Typography, Container } from "@mui/material";
+import {useNavigate} from 'react-router-dom'
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -9,8 +12,10 @@ const LoginForm = () => {
     const password = data.get("password");
 
     // Lógica de autenticação aqui
-    console.log({ email, password });
-  };
+    //verifica se existe no backend um email e password com este nome para poder entrar na app
+    
+  }
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -53,6 +58,22 @@ const LoginForm = () => {
             sx={{ mt: 3, mb: 2 }}
           >
             Login
+          </Button>
+          <Button
+            fullWidth
+            variant="text"
+            onClick={() => navigate("/registry")}
+            sx={{ mb: 2 }}
+          >
+            Register
+          </Button>
+          <Button
+            fullWidth
+            variant="text"
+            //onClick={() => navigate("/recover-password")}
+            sx={{ mb: 2 }}
+          >
+            Recover Password
           </Button>
         </Box>
       </Box>
