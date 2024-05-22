@@ -79,6 +79,7 @@ const RegistryForm = () =>{
               console.log('your password is undefined')
               return false;
               break;
+              //isto nao faz muito sentido, redundante
             case password.length < 8:
                 setInvalidPassword(true);
               console.log('your password length does not have minimum 8 chars')
@@ -109,8 +110,9 @@ const RegistryForm = () =>{
           setInvalidPassword(false);
           return true;
       }
+      
       //handles comparison between password and confirm password field
-      const passwordConfirmation=(password)=>{
+      const passwordConfirmation=(password, confirmPassword)=>{
         if (password !== confirmPassword){
             setPasswordMatchError(true);
             return console.log("password error");
@@ -118,9 +120,11 @@ const RegistryForm = () =>{
         setPasswordMatchError(false);
         return true;
       }
+
+
       //function that verifies if everything is true    
       const credentialConfirmation = ()=>{
-        if (passwordConfirmation(user.password) && emailValidation(user.email) && passwordValidation(user.password)){
+        if (passwordConfirmation(user.password, confirmPassword) && emailValidation(user.email) && passwordValidation(user.password)){
             return true;
         }
         else 
