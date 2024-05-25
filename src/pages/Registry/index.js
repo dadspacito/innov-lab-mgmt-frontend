@@ -144,7 +144,7 @@ const RegistryForm = () =>{
                 <Typography component="h1" variant="h5">
                     Registry
                 </Typography>
-                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }} role = 'registry-form'>
                     <TextField
                         margin="normal"
                         required

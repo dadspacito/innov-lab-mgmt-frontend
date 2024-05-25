@@ -53,8 +53,8 @@ describe('RegistryForm', () => { //group related tests together, in this case is
     expect(getByTestId("confirm-password-input")).toHaveValue('password');
   });
 
-  /*ESTES TESTES AINDA NAO FUNCIONAM*/ 
-describe('When credentials are invalid function values return false', ()=>{
+
+describe('Verification of validation functions', ()=>{
     //teste de email invalido
     test('Invalid email return false on email validation', ()=>{
         expect(emailValidation('mail invalido')).toBe(false);
@@ -90,12 +90,12 @@ describe ('functions within submits are called when submit credentials is clicke
 
     test('calls confirm credentials function when handle submit is clicked', () => {
         const handleSubmitSpy = jest.spyOn(registryForm, 'credentialConfirmation').mockReturnValue(true);
-        const {getByTestId} = render(
+        const {getByRole} = render(
             <Router>
               <RegistryForm />
             </Router>
         )
-        fireEvent.submit(getByTestId('register-button'));
+        fireEvent.submit(getByRole('registry-form'));
         expect(handleSubmitSpy).toHaveBeenCalled();
         handleSubmitSpy.mockRestore();
         
@@ -142,6 +142,8 @@ describe ('functions within submits are called when submit credentials is clicke
       });
 
 })
+
+
 
 describe ('When buttons are clicked the page navigates', ()=>{
     const mockNavigate = jest.fn();
