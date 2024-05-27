@@ -67,7 +67,7 @@ const Header =()=>{
         //aqui faz sentido estar a chamar a função logout? ou faz se logout direto?
     }
 return(
-    <AppBar position="static"> //esta appbar significa o que? qual é a diferença entre isto e o header?
+    <AppBar position="static"> {/*//esta appbar significa o que? qual é a diferença entre isto e o header?*/}
       <Toolbar>
         <IconButton
           size="large"
@@ -83,6 +83,7 @@ return(
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
+            {/**aqui serão colocados as partes de navegação */}
           <MenuItem onClick={handleClose}>Home</MenuItem>
           <MenuItem onClick={handleClose}>About</MenuItem>
           <MenuItem onClick={handleClose}>Contact</MenuItem>
