@@ -1,0 +1,32 @@
+/* ProjectDiv.css */
+.projectCard {
+    /* Add styles to make it look like a card */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: fit-content;
+    display: inline-block;
+
+  }
+  
+  .projectCard h2 {
+    /* Styles for the title */
+    margin-bottom: 5px;
+  }
+  
+  .projectCard p {
+    /* Styles for the description */
+    margin-top: 5px;
+  }
+  /* Responsive styles */
+@media only screen and (max-width: 600px) {
+    .projectCard {
+        /* Adjust styles for smaller screens */
+        width: calc(100% - 20px); /* Take full width minus margins */
+        margin: 10px 0; /* Adjust margin */
+    }
+}
+  

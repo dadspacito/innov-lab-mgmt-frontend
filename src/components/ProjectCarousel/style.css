@@ -1,0 +1,14 @@
+/* ProjectCarousel.css */
+.carouselContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Align items horizontally at the center */
+    align-content: center;
+}
+.projectWrapper {
+    /* Styles for the project wrapper */
+    display: flex;
+    justify-content: center; /* Horizontally center the project */
+  }
+
+
