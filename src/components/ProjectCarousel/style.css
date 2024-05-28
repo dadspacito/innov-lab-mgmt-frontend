@@ -10,5 +10,11 @@
     display: flex;
     justify-content: center; /* Horizontally center the project */
   }
-
+/* Media query for screens smaller than 600px */
+@media screen and (max-width: 600px) {
+    .carouselContainer {
+      /* Adjust styles for smaller screens */
+      flex-direction: column; /* Display items vertically */
+    }
+  }
 
