@@ -6,3 +6,14 @@
  * campo de busca 
  * 
  */
+import react from 'react'
+import ProjectCarousel from '../../components/ProjectCarousel'
+import { GenerateMockProjects } from 'react-dom/test-utils'
+
+const DashBoard = ()=>{
+    return (
+        
+        <ProjectCarousel projects = {GenerateMockProjects}/>
+    )
+}
+export default DashBoard
