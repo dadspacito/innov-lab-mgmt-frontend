@@ -6,14 +6,18 @@
  * campo de busca 
  * 
  */
-import react from 'react'
+import React from 'react'
 import ProjectCarousel from '../../components/ProjectCarousel'
-import { GenerateMockProjects } from 'react-dom/test-utils'
+import {GenerateMockProjects} from '../../Services/utils/GenerateMockProjects'
+import ErrorBoundary from '../../Services/utils/ErrorBoundary'
+
+
 
 const DashBoard = ()=>{
     return (
-        
+        <ErrorBoundary fallback = "Error">
         <ProjectCarousel projects = {GenerateMockProjects}/>
+        </ErrorBoundary>
     )
 }
 export default DashBoard
