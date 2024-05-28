@@ -9,19 +9,20 @@ import ProjectDiv from '../projectDiv'
 
 const ProjectCarousel= ({projects})=>{
     
-    ProjectCarousel.propTypes={
+    /*ProjectCarousel.propTypes={
         projects:PropTypes.arrayOf(
             PropTypes.shape({
                 title: PropTypes.string.isRequired,
                 Description: PropTypes.string.isRequired
             })
         )
-    }
+    }*/
     return (
+        
         <Carousel>
-            {projects.map(project=>{
+            {projects.map(project=>(
                 <ProjectDiv key = {project.id} title = {project.title} description ={project.description}/> 
-            })}
+            ))}
         </Carousel>
     )
 
