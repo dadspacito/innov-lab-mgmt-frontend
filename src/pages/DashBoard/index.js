@@ -1,5 +1,6 @@
 /**
  * esta vai ser a página que serve de dashboard para os projectos
+ * LANDING PAGE
  * tem header
  * carrossel de projetos 
  * botão que leva à pagina de projetos
