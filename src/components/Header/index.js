@@ -4,7 +4,7 @@
  * tem uma renderização condicional, que varia consoante o user estar logado ou nao
  * tem de ser dinamico
  * */
-import react, { useState } from 'react'
+import React, { useState } from 'react'
 import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import {useNavigate} from 'react-router-dom'
