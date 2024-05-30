@@ -10,7 +10,7 @@ const LoginForm = () => {
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
     const password = data.get("password");
-    navigate('/dashboard', {replace:true})
+    navigate('/homepage', {replace:true})
     // Lógica de autenticação aqui
     //verifica se existe no backend um email e password com este nome para poder entrar na app
     console.log(email + " " + password);

@@ -11,17 +11,22 @@ import React from 'react'
 import ProjectCarousel from '../../components/ProjectCarousel'
 import {GenerateMockProjects} from '../../Services/utils/GenerateMockProjects'
 import ErrorBoundary from '../../Services/utils/ErrorBoundary'
+import Header from '../../components/Header';
 
 const projects = GenerateMockProjects();
 
 
-const DashBoard = ()=>{
-    console.log(projects);
+const Homepage = ()=>{
     return (
-        <ErrorBoundary fallback = "There was an error rendering the carousel component">
-        <ProjectCarousel projects = {projects}/>
-        </ErrorBoundary>
+        <>
+            <ErrorBoundary fallback="there was an error rendering the header component">
+                <Header />
+            </ErrorBoundary>
+            <ErrorBoundary fallback="There was an error rendering the carousel component">
+                <ProjectCarousel projects={projects} />
+            </ErrorBoundary>
+        </>
     )
 }
-export default DashBoard
+export default Homepage
 

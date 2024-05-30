@@ -5,28 +5,14 @@
  * tem de ser dinamico
  * */
 import React, { useState } from 'react'
-import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem, Avatar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import {useNavigate} from 'react-router-dom'
+import {usePageNavigation} from '../../Services/utils/PageNavigation';
+
 //função para verificar se o user está logado
 //teria de user o que, um token?
 //tem de ter aqui um navigate para ir para as páginas dos admins e afins. Select que leva às várias páginas 
 /**IMPORTANTE, AS FUNÇÕES DE LOGICA SÃO COLOCADAS FORA DO COMPONENTE PARA PODEREM SER EXPORTADAS E TESTADAS MAIS FACILMENTE */
-export function navigateToPage(page){
-    const navigate = useNavigate();
-
-    switch(page){
-        case 'login':
-            navigate('/login', {replace:true});
-            break;
-        case 'registry':
-            navigate('/registry', {replace:true})
-            break;
-        default:
-            console.log('default case called in the navigate to page function');
-            break;
-    }
-}
 
 export function verifyLoggedInUser(token){
     if (token !== null){
@@ -38,18 +24,15 @@ export function verifyLoggedInUser(token){
     }
     else return false;
 }
-export function logout(){
-    //navega para a dashboard sem estar logged in
-    setIsLoggedIn(false);
-    navigateToPage('login');
-}
-
 
 //preciso de algum props aqui?
+//aqui tem de levar o props do user estar logged in;
 const Header =()=>{
+    const navigateToPage = usePageNavigation();
     //estados aqui
     //aqui é preciso verificar se existe algum token/alguma coisa na store
     //chama o verify user login aqui primeiro
+    
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -62,10 +45,6 @@ const Header =()=>{
     const handleClose = () => {
         setAnchorEl(null);
     };
-    const handleLogout =()=>{
-        logout();
-        //aqui faz sentido estar a chamar a função logout? ou faz se logout direto?
-    }
 return(
     <AppBar position="static"> {/*//esta appbar significa o que? qual é a diferença entre isto e o header?*/}
       <Toolbar>
@@ -93,12 +72,12 @@ return(
         </Typography>
         {isLoggedIn ? (
           <>
-            <Avatar sx={{ marginRight: '8px' }} />
+            <Avatar src = "" sx={{ marginRight: '8px' }} >U</Avatar>
             <a>Nome de user</a>
-            <Button color="inherit" onClick={handleLogout}>Logout</Button>
+            <Button onClick = {()=>navigateToPage('login')} color="inherit">Logout</Button>
           </>
         ) : (
-          <Button color="inherit"onClick = {navigateToPage('login')}>Login / Sign In</Button>
+          <Button color="inherit" onClick = {()=>navigateToPage('login')}>Login / Sign In</Button>
         )}
       </Toolbar>
     </AppBar>
