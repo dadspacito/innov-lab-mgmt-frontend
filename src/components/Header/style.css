@@ -1,0 +1,22 @@
+/* CSS for menu items */
+.menu-items {
+    display: flex; /* Display the menu items */
+    justify-content: space-between; /* Distribute items evenly */
+    align-items: center; /* Align items vertically */
+}
+
+/* CSS for burger button */
+.menu-toggle {
+    display: none; /* Hide the burger button by default */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    /* Show the burger button and hide the menu items */
+    .menu-items {
+        display: none;
+    }
+    .menu-toggle {
+        display: block;
+    }
+}
