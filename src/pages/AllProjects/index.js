@@ -15,7 +15,7 @@ const projects = GenerateMockProjects();
 //aqui tera de receber um props que é a array list dos projetos, ou faz se o import da arraylist dos projetos da store
 const ProjectList = () => {
     const [page,setPage] = useState(1);
-    const [pageSize, setPageSize] =useState(1);
+    const [pageSize, setPageSize] =useState(2);
     const pageCount = Math.ceil(projects.length/pageSize)
     const startIndex = (page-1) * pageSize;
     const visibleProjects = projects.slice(startIndex, startIndex + pageSize);
