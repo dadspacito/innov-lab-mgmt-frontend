@@ -4,7 +4,7 @@
  * tem uma renderização condicional, que varia consoante o user estar logado ou nao
  * tem de ser dinamico
  * */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem, Avatar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import {usePageNavigation} from '../../Services/utils/PageNavigation';
@@ -36,8 +36,9 @@ const Header =()=>{
     
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
-    const [showMenu, setShowMenu] = useState(false); // State to control menu visibility
+    const [showMenu, setShowMenu] = useState(true); // State to control menu visibility
     const [showIcon, setShowIcon] = useState(false);
+    const anchorRef = useRef(null);
 
     //aqui ha uma função que ao verificar se o user está logged in, retorna o set isLoggedIn como true ou false
     useEffect(() => {
@@ -45,7 +46,8 @@ const Header =()=>{
           // Check the window width and set showMenu accordingly
           const width = window.innerWidth;
             setShowMenu(width > 768);
-            setShowIcon(width < 768);
+            setShowIcon(width < 769);
+            //aqui tem que se definir a ref logo quando faz resize
       };
        // Initial check on component mount
        handleResize();
@@ -60,8 +62,13 @@ const Header =()=>{
   }, []); // Empty dependency array ensures the effect runs only once on component mount
 
     const handleMenuClick = (event) => {
-        setAnchorEl(event.currentTarget);
-        setShowMenu(!showMenu);
+        console.log(event.currentTarget);
+        console.log(event)
+        setAnchorEl(anchorRef.current);
+        console.log(anchorEl);
+        
+        //setShowMenu(!showMenu);
+        setShowMenu(true);
     };
 
     const handleClose = () => {
@@ -83,6 +90,7 @@ return(
                         aria-label="menu"
                         onClick={handleMenuClick}
                         className="menu-toggle"
+                        ref = {anchorRef}
                     >
                         <MenuIcon />
                     </IconButton>
@@ -112,7 +120,8 @@ return(
               vertical: 'top',
               horizontal: 'right',
           }}
-          getContentAnchorEl={null}
+          getcontentanchorel={null}
+          //getContentAnchorEl={null}
           className={showMenu ? 'menu-items show' : 'menu-items'} // Apply CSS class to show/hide menu items
         >
             {/**aqui serão colocados as partes de navegação */}
