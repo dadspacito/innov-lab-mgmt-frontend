@@ -20,6 +20,10 @@ export function usePageNavigation() {
           break;
         case 'logout':
             logout()
+            break;
+        case 'allProjects':
+          navigate('/allProjects', {replace:true})
+          break;
         default:
           console.log('Default case called in the navigateToPage function');
           break;

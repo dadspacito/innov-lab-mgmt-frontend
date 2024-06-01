@@ -7,6 +7,7 @@ import RegistryForm from "./pages/Registry";
 import { BrowserRouter as Router} from "react-router-dom";
 import { Routes, Route } from "react-router-dom"
 import Homepage from "./pages/Homepage";
+import ProjectList from "./pages/AllProjects";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,6 +17,7 @@ root.render(
         <Route path="/registry" element={<RegistryForm/>} />
         <Route path="/login" element={<LoginForm/>} />
         <Route path='/homepage' element ={<Homepage/>}/>
+        <Route path ='/allProjects' element = {<ProjectList/>}/>
       </Routes>
     </Router>
 );

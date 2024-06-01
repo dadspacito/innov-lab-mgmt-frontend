@@ -12,11 +12,19 @@ import ProjectCarousel from '../../components/ProjectCarousel'
 import {GenerateMockProjects} from '../../Services/utils/GenerateMockProjects'
 import ErrorBoundary from '../../Services/utils/ErrorBoundary'
 import Header from '../../components/Header';
+import {Button} from '@mui/material'
+import { usePageNavigation } from '../../Services/utils/PageNavigation';
+
 
 const projects = GenerateMockProjects();
 
 
 const Homepage = ()=>{
+    const navigateToPage = usePageNavigation();
+    const handleViewAllProjects = ()=>{
+        navigateToPage('allProjects');
+    }
+
     return (
         <>
             <ErrorBoundary fallback="there was an error rendering the header component">
@@ -25,6 +33,9 @@ const Homepage = ()=>{
             <ErrorBoundary fallback="There was an error rendering the carousel component">
                 <ProjectCarousel projects={projects} />
             </ErrorBoundary>
+            <Button onClick ={handleViewAllProjects} variant="contained" color="primary">
+                View All Projects
+            </Button>
         </>
     )
 }
