@@ -1,0 +1,27 @@
+/* styles.css */
+
+.project-list-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .project-list-wrapper {
+    max-width: 600px; /* Adjust the max-width as needed */
+    border: 1px solid #ccc; /* Add border style */
+    border-radius: 8px; /* Add border radius for rounded corners */
+    padding: 20px; /* Add padding for spacing */
+  }
+  .project-item {
+    border: 1px solid #ccc; /* Add border style */
+    border-radius: 8px; /* Add border radius for rounded corners */
+    margin-bottom: 16px;/* Add margin-bottom for spacing between items */
+  }
+  .project-item:last-child {
+    margin-bottom: 0; /* Remove bottom margin for the last item */
+  }
+  .project-item:not(:last-child) {
+    margin-bottom: 16px; /* Add margin bottom for spacing between project items */
+}
+  .project-item .MuiChip-root {
+    margin-right: 8px; /* Add margin right for spacing between chips */
+}
