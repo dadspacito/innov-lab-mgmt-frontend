@@ -9,19 +9,8 @@
  */
 
 import React from 'react'
+import NameStep from '../../components/ProjectCreationWizard/ProjectName';
 const ProjectCreationWizard = ()=>{
-    /**
-     * TER EM ATENÇÃO SO NOMES DO BACKEND PARA GARANTIR CONSISTENCIA DA NOMENCLATURA
-     * quais são as variaveis dos projetos?
-     * nome:string
-     * descrição:string
-     * localização:string
-     * keywords:[] - é necessário um modal talvez
-     * members:[]
-     * planoExecução (que se calhar mais vale não ter e define-se no projeto em si)
-     * materiais:[]
-     */
-
     const [step, setStep] =  useState(1);
     const [formData, setFormData] = useState({
         name:'',
@@ -31,7 +20,18 @@ const ProjectCreationWizard = ()=>{
         members:[],//array de ids atraves de users disponiveis em base de dados (que não estejam em projetos )
         executionPlan:'',//plano de execução, pode sair mais tarde
         materials:[], //ids de materiais da tabela de materiais 
+        //criador
+        //data de inicio
+        //data de fim 
     })
+    const handleChange =(field, value )=>{
+        setFormData({
+            ...formData,
+            [field]:value
+        })
+    }
+
+    
 
     const handleNextStep=()=>{
         setStep(step+1);
@@ -42,5 +42,10 @@ const ProjectCreationWizard = ()=>{
     const handleSubmit = ()=>{
         //função de handle submit
     }
+    
     //faz retorno dos steps que temos de implementar 
+    return (
+        <NameStep formData={formData} onChange={handleChange}/>
+    )
 }
+export default ProjectCreationWizard;
