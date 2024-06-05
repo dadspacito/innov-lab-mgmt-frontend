@@ -6,6 +6,7 @@
  * 4- implementar a validação do que se está a colocar para se ter a certeza que só se pode passar para o proximo passo quando a validação está correta
  * 5-submissão dos componentes e dos dados (a confirmação é tambem um componente)
  * 
+ * este componente tem de receber um user que associa logo ao email (username)
  */
 
 import React from 'react'
@@ -42,10 +43,13 @@ const ProjectCreationWizard = ()=>{
     const handleSubmit = ()=>{
         //função de handle submit
     }
-    
+    //aqui faz se um switch que consoante o step onde estivermos, faz render aos componentes que se quer
     //faz retorno dos steps que temos de implementar 
+    //wrapped em Error boundary
     return (
+        
         <NameStep formData={formData} onChange={handleChange}/>
+        
     )
 }
 export default ProjectCreationWizard;
