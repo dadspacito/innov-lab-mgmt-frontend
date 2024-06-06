@@ -24,12 +24,19 @@ const ProjectCreationWizard = ()=>{
         //criador
         //data de inicio
         //data de fim 
+        //estado que é planning ou ready
     })
     const handleChange =(field, value )=>{
         setFormData({
             ...formData,
             [field]:value
         })
+        if (field === 'keywords'){
+            setFormData({
+                ...formData,
+                keywords:value
+            })
+        }
     }
 
     
