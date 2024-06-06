@@ -9,6 +9,8 @@ import UserHeader from '../../components/UserProfileComponents/UserHeader';
 import UserPreferences from '../../components/UserProfileComponents/UserPreferences';
 import UserProjects from '../../components/UserProfileComponents/UserProjects';
 
+//fazer uma variavel "is own profile" que retorna true ou false consoante estejamos a ver o nosso perfil ou o de outro user
+
 const UserProfile = ({ user, projects }) => {
     //botão navigate back to where user was? is there a way to store that information? ou devemos ter sempre um anchor point que leva o user sempre ao mesmo sitio?
   return (
