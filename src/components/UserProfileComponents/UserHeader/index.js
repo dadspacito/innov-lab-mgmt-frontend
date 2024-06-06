@@ -4,7 +4,7 @@ import ProfileHeader from './ProfileHeader';
 import PreferencesSection from './PreferencesSection';
 import ProjectsSection from './ProjectsSection';
 
-const UserProfile = ({ user, projects }) => {
+const UserHeader = ({ user, projects }) => {
   return (
     <div className="user-profile">
       <ProfileHeader user={user} />
@@ -14,4 +14,4 @@ const UserProfile = ({ user, projects }) => {
   );
 };
 
-export default UserProfile;
+export default UserHeader;
