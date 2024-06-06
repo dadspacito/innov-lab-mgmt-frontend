@@ -1,7 +1,7 @@
 import React from 'react'
 import {Typography, TextField} from '@mui/material/Typography';
 
-const NameStep= ({formData, onChange})=>{
+const ProjectName= ({formData, onChange})=>{
     const handleChange=(event)=>{
         onChange('name',event.target.value);
     }
@@ -17,4 +17,4 @@ const NameStep= ({formData, onChange})=>{
     </Typography>
     )
 }
-export default NameStep;
+export default ProjectName;

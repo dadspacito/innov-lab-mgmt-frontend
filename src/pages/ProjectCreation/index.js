@@ -10,7 +10,7 @@
  */
 
 import React from 'react'
-import NameStep from '../../components/ProjectCreationWizard/ProjectName';
+import ProjectName from '../../components/ProjectCreationWizard/ProjectName';
 const ProjectCreationWizard = ()=>{
     const [step, setStep] =  useState(1);
     const [formData, setFormData] = useState({
@@ -20,14 +20,15 @@ const ProjectCreationWizard = ()=>{
         keywords:[],//são as tags que depois se associam as chips dos projetos
         members:[],//array de ids atraves de users disponiveis em base de dados (que não estejam em projetos )
         //depois da adição dos membros, perguntar se quer gravar o projeto- status do projecto fica como planning 
-        executionPlan:'',//plano de execução, pode sair mais tarde, é necessário sequer?
+        //executionPlan:'',plano de execução, pode sair mais tarde, é necessário sequer?
         materials:[], //ids de materiais da tabela de materiais 
         //criador-quando se carrega na criação associa-se logo este user 
-        //adicionar datas
-        //data de inicio
-        //data de fim 
+        startDate:'',
+        endDate:'',
         //estado que é planning ou ready
     })
+
+    //falta mudar o handleChange para ter materials e members nos fields 
     const handleChange =(field, value )=>{
         setFormData({
             ...formData,
@@ -38,6 +39,14 @@ const ProjectCreationWizard = ()=>{
                 ...formData,
                 keywords:value
             })
+        }
+        if (field === 'startDate' || field === 'endDate') {
+            // Convert the date value to JSON format
+            const jsonDate = (new Date(value)).toJSON();
+            setFormData({
+                ...formData,
+                [field]: jsonDate
+            });
         }
     }
 
@@ -57,7 +66,7 @@ const ProjectCreationWizard = ()=>{
     //wrapped em Error boundary
     return (
         
-        <NameStep formData={formData} onChange={handleChange}/>
+        <ProjectName formData={formData} onChange={handleChange}/>
         
     )
 }
