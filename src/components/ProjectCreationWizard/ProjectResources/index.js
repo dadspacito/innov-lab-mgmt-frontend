@@ -8,6 +8,7 @@ const mockMaterials = GenerateMockMaterials
 
 const ProjectResources =({formData, onChange})=>{
     //same principle, there's a set to a state of selected materials and those are passed to the project creation. The on change must detect the the field and assign the value
+    //cuidado com os nomes diferentes
     const [projectMaterials, setProjectMaterials] = useState([]);
 
        // Function to handle checkbox change
