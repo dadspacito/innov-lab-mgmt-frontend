@@ -19,10 +19,11 @@ const ProjectCreationWizard = ()=>{
         location:'',//este é uma int/id de uma localização da tabela de localizações
         keywords:[],//são as tags que depois se associam as chips dos projetos
         members:[],//array de ids atraves de users disponiveis em base de dados (que não estejam em projetos )
-        //depois da adição dos membros, perguntar se quer gravar o projeto 
-        executionPlan:'',//plano de execução, pode sair mais tarde
+        //depois da adição dos membros, perguntar se quer gravar o projeto- status do projecto fica como planning 
+        executionPlan:'',//plano de execução, pode sair mais tarde, é necessário sequer?
         materials:[], //ids de materiais da tabela de materiais 
-        //criador
+        //criador-quando se carrega na criação associa-se logo este user 
+        //adicionar datas
         //data de inicio
         //data de fim 
         //estado que é planning ou ready
