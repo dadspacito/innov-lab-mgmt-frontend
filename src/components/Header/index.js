@@ -30,9 +30,6 @@ export function verifyLoggedInUser(token){
 //aqui tem de levar o props do user estar logged in;
 const Header =()=>{
     const navigateToPage = usePageNavigation();
-    //estados aqui
-    //aqui é preciso verificar se existe algum token/alguma coisa na store
-    //chama o verify user login aqui primeiro
     
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -67,13 +64,15 @@ const Header =()=>{
         setAnchorEl(anchorRef.current);
         console.log(anchorEl);
         
-        //setShowMenu(!showMenu);
+        
+        //acho que é preciso aqui uma condicional que verifique que o tamanho de pagina é abaixo de x e abra mesmo nesse tamanho
         setShowMenu(true);
+
     };
 
     const handleClose = () => {
         setAnchorEl(null);
-        setShowMenu(false);
+        //setShowMenu(false);
     };
     
 return(
@@ -97,15 +96,16 @@ return(
                 )}
                 {showMenu && (
                     <div className="menu-items">
-                        <Button color="inherit" onClick={() => navigateToPage('home')}>
+                        <Button color="inherit" onClick={() => navigateToPage('homepage')}>
                             Home
                         </Button>
                         <Button color="inherit" onClick={() => navigateToPage('about')}>
                             About
                         </Button>
-                        <Button color="inherit" onClick={() => navigateToPage('contact')}>
-                            Contact
+                        <Button color="inherit" onClick={() => navigateToPage('userProfile')}>
+                            User Profile
                         </Button>
+                        
                     </div>
                 )}
         <Menu

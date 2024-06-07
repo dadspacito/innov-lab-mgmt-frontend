@@ -1,17 +1,25 @@
-// UserProfile.js
+// ProfileHeader.js
 import React from 'react';
-import ProfileHeader from './ProfileHeader';
-import PreferencesSection from './PreferencesSection';
-import ProjectsSection from './ProjectsSection';
 
-const UserHeader = ({ user, projects }) => {
+const ProfileHeader = ({ user, isOwnProfile }) => {
   return (
-    <div className="user-profile">
-      <ProfileHeader user={user} />
-      <PreferencesSection user={user} />
-      <ProjectsSection userProjects={user.projects} projects={projects} />
+    <div className="profile-header">
+      <div className="profile-photo">
+        <img src={user.photo} alt="Profile" />
+      </div>
+      <div className="profile-details">
+        <h1>{user.firstName} {user.lastName}</h1>
+        <p>{user.email}</p>
+        {isOwnProfile && <p>Location: {user.location}</p>}
+      </div>
+      {isOwnProfile && (
+        <div className="profile-bio">
+          <h2>Bio</h2>
+          <p>{user.bio}</p>
+        </div>
+      )}
     </div>
   );
 };
 
-export default UserHeader;
+export default ProfileHeader;

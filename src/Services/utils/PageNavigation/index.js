@@ -24,6 +24,15 @@ export function usePageNavigation() {
         case 'allProjects':
           navigate('/allProjects', {replace:true})
           break;
+        case 'createProject':
+          navigate('/createProject', {replace:true})
+          break;
+        case 'userProfile':
+          navigate('/userProfile', {replace:true})
+          break;
+        case 'homepage':
+          navigate('/homepage', {replace:true})
+          break;
         default:
           console.log('Default case called in the navigateToPage function');
           break;

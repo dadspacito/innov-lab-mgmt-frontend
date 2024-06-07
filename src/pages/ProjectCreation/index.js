@@ -9,8 +9,20 @@
  * este componente tem de receber um user que associa logo ao email (username)
  */
 
-import React from 'react'
+import React, {useState} from 'react'
 import ProjectName from '../../components/ProjectCreationWizard/ProjectName';
+import ProjectDescription from '../../components/ProjectCreationWizard/ProjectDescription';
+import ProjectLocation from '../../components/ProjectCreationWizard/ProjectLocation';
+import ProjectKeywords from '../../components/ProjectCreationWizard/ProjectKeywords';
+import ProjectMembers from '../../components/ProjectCreationWizard/ProjectMembers';
+import ProjectResources from '../../components/ProjectCreationWizard/ProjectResources';
+import ProjectDates from '../../components/ProjectCreationWizard/ProjectDates';
+import { Button, Box, Container, Typography, Paper } from '@mui/material';
+
+
+import Header from '../../components/Header';
+import ErrorBoundary from './../../Services/utils/ErrorBoundary'
+
 const ProjectCreationWizard = ()=>{
     const [step, setStep] =  useState(1);
     const [formData, setFormData] = useState({
@@ -62,11 +74,60 @@ const ProjectCreationWizard = ()=>{
         //função de handle submit
     }
     //aqui faz se um switch que consoante o step onde estivermos, faz render aos componentes que se quer
+    const renderStepComponent=()=>{
+        switch (step){
+            case 1:
+                return <ProjectName formData={formData} onChange={handleChange}/>;
+            case 2:
+                return <ProjectDescription formData={formData} onChange={handleChange}/>
+            case 3:
+                return <ProjectLocation formData={formData} onChange={handleChange}/>
+            case 4:
+                return <ProjectKeywords formData={formData} onChange={handleChange}/>
+            case 5:
+                return <ProjectMembers formData={formData} onChange={handleChange}/>
+            case 6:
+                return <ProjectResources formData={formData} onChange={handleChange}/>
+            case 7:
+                return <ProjectDates formData={formData} onChange={handleChange}/>
+            default:
+                return null;
+        }
+        
+    }
     //faz retorno dos steps que temos de implementar 
     //wrapped em Error boundary
     return (
-        
-        <ProjectName formData={formData} onChange={handleChange}/>
+        <ErrorBoundary>
+        <Header />
+        <Container maxWidth="md">
+            <Paper elevation={3} sx={{ padding: 3, marginTop: 3 }}>
+                <Typography variant="h4" gutterBottom>
+                    Project Creation Wizard
+                </Typography>
+                <Box sx={{ marginBottom: 3 }}>
+                    {renderStepComponent()}
+                </Box>
+                <Box display="flex" justifyContent="space-between">
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        disabled={step === 1}
+                        onClick={handlePreviousStep}
+                    >
+                        Previous
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleNextStep}
+                    >
+                        {step < 7 ? 'Next' : 'Submit'}
+                    </Button>
+                </Box>
+            </Paper>
+        </Container>
+    </ErrorBoundary>
         
     )
 }

@@ -1,5 +1,6 @@
 //quando aqui chegarmos, criamos uma mock table de keywords (interesses e skills? )
 import React, {useState} from 'react'
+import {Typography, FormControl, Select, Chip, MenuItem,TextField} from '@mui/material'
 import GenerateMockKeywords from './../../../Services/utils/GenerateMockKeywords'
 
 //gerar mock keywords

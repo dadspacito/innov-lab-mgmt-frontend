@@ -1,6 +1,6 @@
-const faker = require('faker');
+import { faker } from '@faker-js/faker';
 
-const generateMockUsers = () => {
+const GenerateMockUsers = () => {
     const users = [];
     const roles = ['verified', 'not verified'];
 
@@ -17,11 +17,14 @@ const generateMockUsers = () => {
 
     // Generate 19 regular users
     for (let i = 2; i <= 20; i++) {
-        const firstName = faker.name.firstName();
-        const lastName = faker.name.lastName();
+        const firstName = faker.person.firstName();
+        const lastName = faker.person.lastName();
         const role = roles[Math.floor(Math.random() * roles.length)];
-        const email = faker.internet.email();
-        const location = faker.random.arrayElement(['Tomar', 'Lisboa', 'Coimbra', 'VilaReal', 'Porto']);
+        // Ensure email uniqueness by appending index
+        const email = `${firstName.toLowerCase()}.${lastName.toLowerCase()}${i}@example.com`;
+        // Updated method to get random element from array
+        const location = faker.helpers.arrayElement(['Tomar', 'Lisboa', 'Coimbra', 'VilaReal', 'Porto']);
+        // Generate a unique username by including the index
         const username = `${firstName.toLowerCase()}_${lastName.toLowerCase()}_${i}`;
 
         users.push({
@@ -38,5 +41,4 @@ const generateMockUsers = () => {
     return users;
 };
 
-const mockUsers = generateMockUsers();
-console.log(mockUsers);
+export default GenerateMockUsers;

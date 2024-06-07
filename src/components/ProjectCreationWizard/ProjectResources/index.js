@@ -1,54 +1,71 @@
-//pagina dos materiais, faz se um array de recursos
+import React, { useState } from 'react';
+import { FormControl, FormGroup, FormControlLabel, Checkbox, Typography, Box, List, ListItem, ListItemText, Paper, Divider } from '@mui/material';
+import GenerateMockMaterials from '../../../Services/utils/GenerateMockMaterials';
 
+const mockMaterials = GenerateMockMaterials();
 
-import React from 'react'
-import GenerateMockMaterials from '../../../Services/utils/GenerateMockMaterials'
+const ProjectResources = ({ formData, onChange }) => {
+    // Initialize state for selected materials
+    const [selectedMaterials, setSelectedMaterials] = useState([]);
 
-const mockMaterials = GenerateMockMaterials
-
-const ProjectResources =({formData, onChange})=>{
-    //same principle, there's a set to a state of selected materials and those are passed to the project creation. The on change must detect the the field and assign the value
-    //cuidado com os nomes diferentes
-    const [projectMaterials, setProjectMaterials] = useState([]);
-
-       // Function to handle checkbox change
-       const handleCheckboxChange = (materialId) => {
+    // Function to handle checkbox change
+    const handleCheckboxChange = (materialId) => {
         // Toggle selection of the material
-        if (selectedMaterials.includes(materialId)) {
-            setSelectedMaterials(selectedMaterials.filter(id => id !== materialId));
-        } else {
-            setSelectedMaterials([...selectedMaterials, materialId]);
-        }
+        const updatedSelectedMaterials = selectedMaterials.includes(materialId)
+            ? selectedMaterials.filter(id => id !== materialId)
+            : [...selectedMaterials, materialId];
+
+        setSelectedMaterials(updatedSelectedMaterials);
+
+        // Update the parent component's form data
+        onChange('materials', updatedSelectedMaterials);
     };
 
     return (
-        <div>
-            <h2>Project Resources</h2>
-            <ul>
-                {mockMaterials.map(material => (
-                    <li key={material.id}>
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={selectedMaterials.includes(material.id)}
-                                onChange={() => handleCheckboxChange(material.id)}
-                            />
-                            {material.name}
-                        </label>
-                    </li>
-                ))}
-            </ul>
-            <div>
-                <h3>Selected Materials</h3>
-                <ul>
-                    {selectedMaterials.map(materialId => (
-                        <li key={materialId}>
-                            {mockMaterials.find(material => material.id === materialId).name}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </div>
-    );
+        <Box sx={{ padding: 2 }}>
+            <Typography variant="h5" gutterBottom>
+                Project Resources
+            </Typography>
 
-}
+            {/* Display list of all available materials */}
+            <FormControl component="fieldset">
+                <FormGroup>
+                    {mockMaterials.map(material => (
+                        <FormControlLabel
+                            key={material.id}
+                            control={
+                                <Checkbox
+                                    checked={selectedMaterials.includes(material.id)}
+                                    onChange={() => handleCheckboxChange(material.id)}
+                                    name={material.name}
+                                />
+                            }
+                            label={material.name}
+                        />
+                    ))}
+                </FormGroup>
+            </FormControl>
+
+            <Divider sx={{ marginY: 2 }} />
+
+            {/* Display list of selected materials */}
+            <Typography variant="h6" gutterBottom>
+                Selected Materials
+            </Typography>
+            <Paper elevation={3} sx={{ padding: 2 }}>
+                <List>
+                    {selectedMaterials.map(materialId => {
+                        const material = mockMaterials.find(m => m.id === materialId);
+                        return (
+                            <ListItem key={materialId}>
+                                <ListItemText primary={material.name} />
+                            </ListItem>
+                        );
+                    })}
+                </List>
+            </Paper>
+        </Box>
+    );
+};
+
+export default ProjectResources;

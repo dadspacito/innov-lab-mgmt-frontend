@@ -24,6 +24,9 @@ const Homepage = ()=>{
     const handleViewAllProjects = ()=>{
         navigateToPage('allProjects');
     }
+    const handleCreateNewProject = ()=>{
+        navigateToPage('createProject')
+    }
 
     return (
         <>
@@ -35,6 +38,9 @@ const Homepage = ()=>{
             </ErrorBoundary>
             <Button onClick ={handleViewAllProjects} variant="contained" color="primary">
                 View All Projects
+            </Button>
+            <Button onClick ={handleCreateNewProject} variant="contained" color="primary">
+                Create new Project
             </Button>
         </>
     )

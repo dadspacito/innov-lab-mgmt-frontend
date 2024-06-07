@@ -1,5 +1,5 @@
 import React from 'react'
-import {Typography, TextField} from '@mui/material/Typography';
+import {Typography, TextField} from '@mui/material';
 
 const ProjectName= ({formData, onChange})=>{
     const handleChange=(event)=>{

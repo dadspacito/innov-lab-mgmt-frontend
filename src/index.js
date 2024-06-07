@@ -8,6 +8,8 @@ import { BrowserRouter as Router} from "react-router-dom";
 import { Routes, Route } from "react-router-dom"
 import Homepage from "./pages/Homepage";
 import ProjectList from "./pages/AllProjects";
+import ProjectCreationWizard from "./pages/ProjectCreation";
+import UserProfile from "./pages/UserProfile";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -18,6 +20,8 @@ root.render(
         <Route path="/login" element={<LoginForm/>} />
         <Route path='/homepage' element ={<Homepage/>}/>
         <Route path ='/allProjects' element = {<ProjectList/>}/>
+        <Route path = '/createProject' element ={<ProjectCreationWizard />}/>
+        <Route path = '/userProfile' element = {<UserProfile/>}/>
       </Routes>
     </Router>
 );
