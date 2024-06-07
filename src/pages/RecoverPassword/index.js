@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { TextField, Button, Box, Typography, Modal, Alert } from '@mui/material';
+import { TextField, Button, Box, Typography, Modal, Alert,IconButton } from '@mui/material';
 import  GenerateMockUsers  from '../../Services/utils/GenerateMockUsers'; // Import your mock users for email verification
+import { usePageNavigation, } from '../../Services/utils/PageNavigation';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // Mock users for demonstration
 const mockUsers = GenerateMockUsers();
+
 
 const RecoverPassword = () => {
     const [email, setEmail] = useState('');
     const [emailExists, setEmailExists] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [error, setError] = useState(null);
+    const navigateToPage = usePageNavigation();
 
    useEffect(() => {
         console.log(mockUsers);
@@ -27,6 +31,7 @@ const RecoverPassword = () => {
             setEmailExists(true);
             setShowModal(true);
             setError(null);
+            navigateToPage('login');
         } else {
             setEmailExists(false);
             setError("The provided email does not exist.");
@@ -40,6 +45,15 @@ const RecoverPassword = () => {
 
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+                <IconButton onClick={()=>navigateToPage('login')}
+                sx={{ 
+                    position: 'absolute', 
+                    top: 16,  // Adjusts the distance from the top
+                    left: 16  // Adjusts the distance from the left
+                }}
+                >
+                    <ArrowBackIcon />
+                </IconButton>
             <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, p: 4, border: '1px solid #ddd', borderRadius: 2, boxShadow: 3 }}>
                 <Typography variant="h5" gutterBottom>Recover Password</Typography>
                 <TextField
