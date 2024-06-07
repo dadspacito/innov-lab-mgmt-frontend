@@ -12,7 +12,6 @@ export function usePageNavigation() {
     return function navigateToPage(page) {
       switch (page) {
         case 'login':
-            console.log('login being called')
           navigate('/login', { replace: true });
           break;
         case 'registry':
@@ -32,6 +31,9 @@ export function usePageNavigation() {
           break;
         case 'homepage':
           navigate('/homepage', {replace:true})
+          break;
+        case 'recoverPassword':
+          navigate('/recoverpassword', {replace:true})
           break;
         default:
           console.log('Default case called in the navigateToPage function');

@@ -1,7 +1,7 @@
 //fazer um mock de uma lista como se recebesse do backend de user
 //vai receber um array de users que dispoe numa lista
 import React, {useState} from 'react'
-import generateMockUsers from './../../../Services/utils/generateMockUsers'
+import generateMockUsers from '../../../Services/utils/GenerateMockUsers'
 
 //recebe a user list
 //const mockUserList = generateMockUsers();

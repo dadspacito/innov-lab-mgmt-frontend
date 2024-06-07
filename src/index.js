@@ -10,6 +10,7 @@ import Homepage from "./pages/Homepage";
 import ProjectList from "./pages/AllProjects";
 import ProjectCreationWizard from "./pages/ProjectCreation";
 import UserProfile from "./pages/UserProfile";
+import RecoverPassword from "./pages/RecoverPassword";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -22,6 +23,7 @@ root.render(
         <Route path ='/allProjects' element = {<ProjectList/>}/>
         <Route path = '/createProject' element ={<ProjectCreationWizard />}/>
         <Route path = '/userProfile' element = {<UserProfile/>}/>
+        <Route path ='/recoverpassword' element = {<RecoverPassword />}/>
       </Routes>
     </Router>
 );

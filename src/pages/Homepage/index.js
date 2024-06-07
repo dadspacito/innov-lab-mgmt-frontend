@@ -12,8 +12,9 @@ import ProjectCarousel from '../../components/ProjectCarousel'
 import {GenerateMockProjects} from '../../Services/utils/GenerateMockProjects'
 import ErrorBoundary from '../../Services/utils/ErrorBoundary'
 import Header from '../../components/Header';
-import {Button} from '@mui/material'
-import { usePageNavigation } from '../../Services/utils/PageNavigation';
+import {Button, Box} from '@mui/material'
+import { usePageNavigation, } from '../../Services/utils/PageNavigation';
+import DescriptionSection from '../../components/DescriptionSection';
 
 
 const projects = GenerateMockProjects();
@@ -30,19 +31,26 @@ const Homepage = ()=>{
 
     return (
         <>
-            <ErrorBoundary fallback="there was an error rendering the header component">
-                <Header />
+        <ErrorBoundary fallback="There was an error rendering the header component">
+            <Header />
+        </ErrorBoundary>
+        <Box sx={{ padding: '20px' }}> {/* Add some padding to the main content area */}
+            <ErrorBoundary fallback="There was an error rendering the description component">
+                <DescriptionSection />
             </ErrorBoundary>
             <ErrorBoundary fallback="There was an error rendering the carousel component">
                 <ProjectCarousel projects={projects} />
             </ErrorBoundary>
-            <Button onClick ={handleViewAllProjects} variant="contained" color="primary">
-                View All Projects
-            </Button>
-            <Button onClick ={handleCreateNewProject} variant="contained" color="primary">
-                Create new Project
-            </Button>
-        </>
+            <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                <Button onClick={handleViewAllProjects} variant="contained" color="primary" sx={{ marginRight: '10px' }}>
+                    View All Projects
+                </Button>
+                <Button onClick={handleCreateNewProject} variant="contained" color="primary">
+                    Create New Project
+                </Button>
+            </Box>
+        </Box>
+    </>
     )
 }
 export default Homepage
