@@ -1,0 +1,14 @@
+/* style.css */
+.wrapper-div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.wrapper-material-div {
+    margin-bottom: 10px;
+}
+
+.selected-list {
+    margin-top: 20px;
+}

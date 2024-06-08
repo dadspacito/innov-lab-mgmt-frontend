@@ -1,5 +1,6 @@
 import React from 'react';
-import { Typography, TextareaAutosize } from '@mui/material';
+import { Typography, TextareaAutosize, InputLabel } from '@mui/material';
+import './style.css'
 
 
 const ProjectDescription =({formData, onChange})=>{
@@ -10,8 +11,9 @@ const ProjectDescription =({formData, onChange})=>{
 
     return(
         <Typography variant="body1">
-        <label>Give a small project description:</label>
+        <InputLabel htmlFor="project-description">Project Description:</InputLabel>
         <TextareaAutosize
+                className = 'project-description'
                 value={formData.description}
                 onChange={handleChange}
                 minRows={3} // Optional: specify minimum number of rows

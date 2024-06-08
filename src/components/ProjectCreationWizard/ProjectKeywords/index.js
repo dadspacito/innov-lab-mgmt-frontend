@@ -1,42 +1,67 @@
-//quando aqui chegarmos, criamos uma mock table de keywords (interesses e skills? )
-import React, {useState} from 'react'
-import {Typography, FormControl, Select, Chip, MenuItem,TextField} from '@mui/material'
-import GenerateMockKeywords from './../../../Services/utils/GenerateMockKeywords'
+import React, { useState, useEffect } from 'react';
+import { Typography, FormControl, Select, Chip, MenuItem, TextField, Button } from '@mui/material';
+import GenerateMockKeywords from '../../../Services/utils/GenerateMockKeywords';
 
-//gerar mock keywords
+// Generate mock keywords
 const mockKeywords = GenerateMockKeywords();
-//solução podera ser a criação de um novo array que junta as skills e interesses selecionados 
-const ProjectKeywords = ({formData, onChange})=>{
+
+const ProjectKeywords = ({ formData, onChange }) => {
     const [selectedSkills, setSelectedSkills] = useState([]);
     const [selectedInterests, setSelectedInterests] = useState([]);
     const [newKeyword, setNewKeyword] = useState('');
-    //aqui será uma selected keyword
-    //este state guarda as keywords escolhidas
-    const [selectedKeywords, setSelectedKeywords] = useState([]);
+    const [selectedKeywords, setSelectedKeywords] = useState([]); // Combined keywords state
+
+    useEffect(() => {
+        console.log(mockKeywords);
+    }, []);
+
+    // Function to update the combined keywords state
+    const updateSelectedKeywords = (skills, interests) => {
+        const combinedKeywords = [...skills, ...interests];
+        setSelectedKeywords(combinedKeywords);
+        onChange('keywords', combinedKeywords); // Optionally notify the parent component
+    };
 
     const handleSkillChange = (event) => {
-        setSelectedSkills(event.target.value);
+        const skills = event.target.value;
+        setSelectedSkills(skills);
+        updateSelectedKeywords(skills, selectedInterests); // Update combined state
     };
 
     const handleInterestChange = (event) => {
-        setSelectedInterests(event.target.value);
+        const interests = event.target.value;
+        setSelectedInterests(interests);
+        updateSelectedKeywords(selectedSkills, interests); // Update combined state
     };
 
     const handleNewKeywordChange = (event) => {
         setNewKeyword(event.target.value);
     };
+
     const handleAddKeyword = () => {
-        // Add the new keyword to the appropriate category (skills or interests)
-        if (formData.category === 'Skills') {
-            setSelectedSkills([...selectedSkills, newKeyword]);
-        } else if (formData.category === 'Interests') {
-            setSelectedInterests([...selectedInterests, newKeyword]);
+        if (formData.category === 'Skills' && newKeyword) {
+            const updatedSkills = [...selectedSkills, newKeyword];
+            setSelectedSkills(updatedSkills);
+            updateSelectedKeywords(updatedSkills, selectedInterests); // Update combined state
+        } else if (formData.category === 'Interests' && newKeyword) {
+            const updatedInterests = [...selectedInterests, newKeyword];
+            setSelectedInterests(updatedInterests);
+            updateSelectedKeywords(selectedSkills, updatedInterests); // Update combined state
         }
-        setNewKeyword('');
+        setNewKeyword(''); // Clear the input field
     };
-    //aqui concatena as selected skills e interests como um array de 2 dimensoes para selected keywords
 
-
+    const handleDeleteKeyword = (keyword, category) => {
+        if (category === 'Skills') {
+            const updatedSkills = selectedSkills.filter((item) => item !== keyword);
+            setSelectedSkills(updatedSkills);
+            updateSelectedKeywords(updatedSkills, selectedInterests); // Update combined state
+        } else if (category === 'Interests') {
+            const updatedInterests = selectedInterests.filter((item) => item !== keyword);
+            setSelectedInterests(updatedInterests);
+            updateSelectedKeywords(selectedSkills, updatedInterests); // Update combined state
+        }
+    };
 
     return (
         <div>
@@ -86,11 +111,12 @@ const ProjectKeywords = ({formData, onChange})=>{
 
             <Typography variant="h6">Selected Keywords</Typography>
             <div>
-                {selectedSkills.map((keyword) => (
-                    <Chip key={keyword} label={keyword} onDelete={() => setSelectedSkills(selectedSkills.filter((item) => item !== keyword))} />
-                ))}
-                {selectedInterests.map((keyword) => (
-                    <Chip key={keyword} label={keyword} onDelete={() => setSelectedInterests(selectedInterests.filter((item) => item !== keyword))} />
+                {selectedKeywords.map((keyword) => (
+                    <Chip 
+                        key={keyword} 
+                        label={keyword} 
+                        onDelete={() => handleDeleteKeyword(keyword, selectedSkills.includes(keyword) ? 'Skills' : 'Interests')}
+                    />
                 ))}
             </div>
 
@@ -103,11 +129,12 @@ const ProjectKeywords = ({formData, onChange})=>{
                     variant="outlined"
                     fullWidth
                 />
-                <button onClick={handleAddKeyword}>Add Keyword</button>
+                <Button onClick={handleAddKeyword} variant="contained" color="primary" sx={{ mt: 2 }}>
+                    Add Keyword
+                </Button>
             </div>
         </div>
     );
-    
+};
 
-}
 export default ProjectKeywords;

@@ -1,7 +1,8 @@
 //fazer um mock de uma lista como se recebesse do backend de user
 //vai receber um array de users que dispoe numa lista
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import generateMockUsers from '../../../Services/utils/GenerateMockUsers'
+//o que é a some keyword
 
 //recebe a user list
 //const mockUserList = generateMockUsers();
@@ -10,6 +11,9 @@ const users = generateMockUsers();
 const ProjectMembers = ({formData, onChange}) =>{
     const [projectMembers, setProjectMembers] = useState([]);
     //falta depois ver aqui o onChange
+    useEffect(()=>{
+        console.log(users)
+    },[])
     
     const handleCheckboxChange = (user) => {
         // Check if the user is already selected
@@ -35,10 +39,10 @@ const ProjectMembers = ({formData, onChange}) =>{
                     <div key={user.id}>
                         <input
                             type="checkbox"
-                            checked={projectMembers.some((member) => member.id === user.id)}
+                            checked={projectMembers.some((member) => member.id === user.id)} 
                             onChange={() => handleCheckboxChange(user)}
                         />
-                        <label>{user.name}</label>
+                        <label>{user.firstName + ' ' +  user.lastName}</label>
                     </div>
                 ))}
             </div>

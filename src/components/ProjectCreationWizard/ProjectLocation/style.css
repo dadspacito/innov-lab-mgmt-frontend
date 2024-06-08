@@ -1,0 +1,30 @@
+/* General wrapper for the locations */
+.wrapper-div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 20px;
+}
+
+/* Individual location div */
+.wrapper-location-div {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #fff; /* Default background */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Hover effect to give feedback */
+.wrapper-location-div:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.05);
+}
+
+/* Style for selected location */
+.wrapper-location-div.selected {
+    background-color: #e0f7fa; /* Highlight the selected location */
+    border-color: #00796b; /* Optional: change border color to highlight */
+}

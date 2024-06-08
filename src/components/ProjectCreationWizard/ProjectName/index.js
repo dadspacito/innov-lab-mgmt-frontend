@@ -1,5 +1,6 @@
 import React from 'react'
-import {Typography, TextField} from '@mui/material';
+import {Typography, TextField, InputLabel} from '@mui/material';
+import './Styles.css'
 
 const ProjectName= ({formData, onChange})=>{
     const handleChange=(event)=>{
@@ -7,8 +8,9 @@ const ProjectName= ({formData, onChange})=>{
     }
     return (
         <Typography variant="body1">
-        <label>Project Name:</label>
+        <InputLabel htmlFor="project-name">Project Name:</InputLabel>
         <TextField
+                className = "project-name"
                 type="text"
                 value={formData.name}
                 onChange={handleChange}
