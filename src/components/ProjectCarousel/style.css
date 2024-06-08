@@ -1,3 +1,5 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
 /* ProjectCarousel.css */
 .carouselContainer {
     display: flex;
@@ -17,4 +19,5 @@
       flex-direction: column; /* Display items vertically */
     }
   }
+  
 
