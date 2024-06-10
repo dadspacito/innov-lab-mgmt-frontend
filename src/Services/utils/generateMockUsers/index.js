@@ -26,6 +26,7 @@ const GenerateMockUsers = () => {
         const location = faker.helpers.arrayElement(['Tomar', 'Lisboa', 'Coimbra', 'VilaReal', 'Porto']);
         // Generate a unique username by including the index
         const username = `${firstName.toLowerCase()}_${lastName.toLowerCase()}_${i}`;
+        //const photo = URL
 
         users.push({
             id: i,

@@ -4,11 +4,23 @@
 import React from 'react'
 import './style.css'
 
-const ProjectDiv = ({title, description})=>{
+const ProjectDiv = ({title, description, isUserOn})=>{
+    const handleApply =()=>{
+            console.log('click')
+    }
+    //tem de retornar o numero de elemebntos 
     return (
+        
+
         <div className="projectCard">
             <h2>{title}</h2>
             <p>{description}</p>
+            {isUserOn && (
+                <>
+                    <button onClick={handleApply}>Apply</button>
+                    {/* <p>{`Number of Members: ${numberOfMembers}`}</p> */}
+                </>
+            )}
         </div>
     )
 

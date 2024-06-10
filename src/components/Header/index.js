@@ -5,7 +5,7 @@
  * tem de ser dinamico
  * */
 import React, { useState, useEffect, useRef } from 'react'
-import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem, Avatar } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem, Avatar, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import {usePageNavigation} from '../../Services/utils/PageNavigation';
 import './style.css'
@@ -28,7 +28,7 @@ export function verifyLoggedInUser(token){
 
 //preciso de algum props aqui?
 //aqui tem de levar o props do user estar logged in;
-const Header =()=>{
+const Header =({isUserOn, userName})=>{
     const navigateToPage = usePageNavigation();
     
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -36,6 +36,7 @@ const Header =()=>{
     const [showMenu, setShowMenu] = useState(true); // State to control menu visibility
     const [showIcon, setShowIcon] = useState(false);
     const anchorRef = useRef(null);
+    const mockUserPicture = 'https://static-00.iconduck.com/assets.00/avatar-default-icon-2048x2048-h6w375ur.png'; // Placeholder image
 
     //aqui ha uma função que ao verificar se o user está logged in, retorna o set isLoggedIn como true ou false
     useEffect(() => {
@@ -45,6 +46,7 @@ const Header =()=>{
             setShowMenu(width > 768);
             setShowIcon(width < 769);
             //aqui tem que se definir a ref logo quando faz resize
+
       };
        // Initial check on component mount
        handleResize();
@@ -57,6 +59,11 @@ const Header =()=>{
       // Cleanup event listener on component unmount
       return () => window.removeEventListener('resize', handleResize);
   }, []); // Empty dependency array ensures the effect runs only once on component mount
+  useEffect(()=>{
+    console.log('a vir do header');
+    console.log(isUserOn);
+    
+  }, [isUserOn])
 
     const handleMenuClick = (event) => {
         console.log(event.currentTarget);
@@ -74,6 +81,9 @@ const Header =()=>{
         setAnchorEl(null);
         //setShowMenu(false);
     };
+    const handleUserClick = () => {
+      console.log("User's name clicked!");
+  };
     
 return(
     <AppBar position="static"> {/*//esta appbar significa o que? qual é a diferença entre isto e o header?*/}
@@ -102,10 +112,20 @@ return(
                         <Button color="inherit" onClick={() => navigateToPage('about')}>
                             About
                         </Button>
-                        <Button color="inherit" onClick={() => navigateToPage('userProfile')}>
-                            User Profile
-                        </Button>
-                        
+                       
+                        {isUserOn && (
+                            <>
+                               <Button color="inherit" onClick={() => navigateToPage('userProfile')}>
+                                    User Profile
+                                </Button>
+                                <Button color="inherit" onClick={() => navigateToPage('materials')}>
+                                    Materials
+                                </Button>
+                                <Button color="inherit" onClick={() => navigateToPage('adminPage')}>
+                                    Admin Page
+                                </Button>
+                            </>
+                        )}
                     </div>
                 )}
         <Menu
@@ -129,16 +149,17 @@ return(
           <MenuItem onClick={handleClose}>About</MenuItem>
           <MenuItem onClick={handleClose}>Contact</MenuItem>
         </Menu>
-        
-        {isLoggedIn ? (
-          <>
-            <Avatar src = "" sx={{ marginRight: '8px' }} >U</Avatar>
-            <a>Nome de user</a>
-            <Button onClick = {()=>navigateToPage('login')} color="inherit">Logout</Button>
-          </>
-        ) : (
-          <Button color="inherit" onClick = {()=>navigateToPage('login')}>Login / Sign In</Button>
-        )}
+        {isUserOn ? (
+                    <>
+                        <Box display="flex" alignItems="center" onClick={handleUserClick} sx={{ cursor: 'pointer' }}>
+                            <Avatar src={mockUserPicture || ''} sx={{ marginRight: '8px' }}>U</Avatar>
+                            <Typography variant="body1" color="inherit">{userName || 'User'}</Typography>
+                        </Box>
+                        <Button onClick={() => navigateToPage('logout')} color="inherit">Logout</Button>
+                    </>
+                ) : (
+                    <Button color="inherit" onClick={() => navigateToPage('login')}>Login / Sign In</Button>
+                )}
       </Toolbar>
     </AppBar>
 )

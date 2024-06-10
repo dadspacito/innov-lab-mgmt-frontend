@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import ProjectDiv from '../projectDiv'; // Ensure the correct path to ProjectDiv
 import './style.css'
 
-
-const ProjectCarousel = ({ projects }) => {
+//este componente tem de receber o user is logged on 
+const ProjectCarousel = ({ projects, isUserOn }) => {
     const settings = {
         dots: true,
         infinite: true,
@@ -46,7 +46,7 @@ const ProjectCarousel = ({ projects }) => {
         <Slider {...settings} className="carouselContainer">
             {projects.map(project => (
                 <div key={project.id} className="projectWrapper">
-                    <ProjectDiv title={project.title} description={project.description} />
+                    <ProjectDiv title={project.title} description={project.description} isUserOn = {isUserOn} />
                 </div>
             ))}
         </Slider>
