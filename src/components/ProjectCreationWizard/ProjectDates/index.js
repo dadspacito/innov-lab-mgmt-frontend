@@ -1,6 +1,9 @@
+//date picker tem de ser construido por causa de dependencias such as localization provider e adapter days 
+
+
 import React from 'react';
-import { DatePicker } from '@mui/x-date-pickers';
-import { TextField } from '@mui/material';
+import DatePickerComponent from '../../DatePicker';
+
 const ProjectDates = ({ formData, onChange }) => {
     const handleStartDateChange = (date) => {
         onChange('startDate', date.toJSON());
@@ -12,18 +15,7 @@ const ProjectDates = ({ formData, onChange }) => {
 
     return (
         <div>
-            <DatePicker
-                label="Start Date"
-                value={formData.startDate || null}
-                onChange={handleStartDateChange}
-                renderInput={(params) => <TextField {...params} />}
-            />
-            <DatePicker
-                label="End Date"
-                value={formData.endDate || null}
-                onChange={handleEndDateChange}
-                renderInput={(params) => <TextField {...params} />}
-            />
+            <DatePickerComponent/>
         </div>
     );
 };

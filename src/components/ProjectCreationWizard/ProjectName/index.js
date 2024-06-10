@@ -5,6 +5,7 @@ import './Styles.css'
 const ProjectName= ({formData, onChange})=>{
     const handleChange=(event)=>{
         onChange('name',event.target.value);
+        console.log(formData);
     }
     return (
         <Typography variant="body1">

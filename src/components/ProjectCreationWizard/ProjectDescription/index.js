@@ -6,6 +6,7 @@ import './style.css'
 const ProjectDescription =({formData, onChange})=>{
     const handleChange =(event)=>{
         onChange('description',event.target.value)
+        console.log(formData);
     };
 
 

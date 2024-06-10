@@ -12,6 +12,7 @@ const ProjectMembers = ({formData, onChange}) =>{
     const [projectMembers, setProjectMembers] = useState([]);
     //falta depois ver aqui o onChange
     useEffect(()=>{
+        console.log(formData);
         console.log(users)
     },[])
     

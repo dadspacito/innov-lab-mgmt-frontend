@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { FormControl, FormGroup, FormControlLabel, Checkbox, Typography, Box, List, ListItem, ListItemText, Paper, Divider } from '@mui/material';
+import { FormGroup, FormControlLabel, Checkbox, Typography, Box, List, ListItem, ListItemText, Paper, Divider, Button } from '@mui/material';
 import GenerateMockMaterials from '../../../Services/utils/GenerateMockMaterials';
-import './style.css'
+import './style.css';
+
 // Generate mock materials
 const mockMaterials = GenerateMockMaterials();
 
@@ -10,12 +11,20 @@ const ProjectResources = ({ formData, onChange }) => {
     const [selectedComponents, setSelectedComponents] = useState([]);
     const [selectedResources, setSelectedResources] = useState([]);
 
+    // Function to compute combined selected materials
+    const computeSelectedMaterials = () => {
+        return [
+            ...mockMaterials.components.filter(component => selectedComponents.includes(component.id)),
+            ...mockMaterials.resources.filter(resource => selectedResources.includes(resource.id))
+        ];
+    };
+
+    // Effect to propagate selected materials to parent
     useEffect(() => {
-        console.log(mockMaterials);
-        // Initialize from formData if available
-        // setSelectedComponents(formData.components || []);
-        // setSelectedResources(formData.resources || []);
-    }, []); // Empty dependency array means this effect runs only once after the initial render
+        const combinedMaterials = computeSelectedMaterials();
+        onChange('materials', combinedMaterials);
+        console.log(formData);
+    }, []);
 
     // Function to handle checkbox change
     const handleCheckboxChange = (materialId, type) => {
@@ -36,6 +45,8 @@ const ProjectResources = ({ formData, onChange }) => {
         }
     };
 
+    // Function to handle "Next" button click
+
     return (
         <Box sx={{ padding: 2 }}>
             <Typography variant="h5" gutterBottom>
@@ -43,10 +54,10 @@ const ProjectResources = ({ formData, onChange }) => {
             </Typography>
 
             {/* Section for Components */}
-            <Typography variant="h6" gutterBottom>
-                Components
-            </Typography>
-            <FormControl component="fieldset">
+            <Box sx={{ marginBottom: 2 }}>
+                <Typography component="div" variant="h6" gutterBottom>
+                    Components
+                </Typography>
                 <FormGroup>
                     {mockMaterials.components.map(component => (
                         <FormControlLabel
@@ -62,15 +73,15 @@ const ProjectResources = ({ formData, onChange }) => {
                         />
                     ))}
                 </FormGroup>
-            </FormControl>
+            </Box>
 
             <Divider sx={{ marginY: 2 }} />
 
             {/* Section for Resources */}
-            <Typography variant="h6" gutterBottom>
-                Resources
-            </Typography>
-            <FormControl component="fieldset">
+            <Box sx={{ marginBottom: 2 }}>
+                <Typography component="div" variant="h6" gutterBottom>
+                    Resources
+                </Typography>
                 <FormGroup>
                     {mockMaterials.resources.map(resource => (
                         <FormControlLabel
@@ -86,7 +97,7 @@ const ProjectResources = ({ formData, onChange }) => {
                         />
                     ))}
                 </FormGroup>
-            </FormControl>
+            </Box>
 
             <Divider sx={{ marginY: 2 }} />
 

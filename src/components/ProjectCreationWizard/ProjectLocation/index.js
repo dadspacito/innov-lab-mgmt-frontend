@@ -6,6 +6,7 @@ import './style.css'; // Ensure you import the CSS file
 const mockLocations = GenerateMockLocations();
 
 const ProjectLocations = ({ formData, onChange }) => {
+    
     useEffect(() => {
         console.log(mockLocations);
     }, []);
