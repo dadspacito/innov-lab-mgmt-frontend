@@ -56,7 +56,7 @@ const Homepage = ()=>{
     return (
         <>
         <ErrorBoundary fallback="There was an error rendering the header component">
-            <Header isUserOn = {isUserOn}  userName = {user.username}/>
+            <Header isUserOn = {isUserOn}  userName = {user.username} user={user}/>
         </ErrorBoundary>
         <Box sx={{ padding: '20px' }}> {/* Add some padding to the main content area */}
             <ErrorBoundary fallback="There was an error rendering the description component">

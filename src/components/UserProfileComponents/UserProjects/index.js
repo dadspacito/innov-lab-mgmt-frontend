@@ -1,22 +1,36 @@
-// ProjectsSection.js
-import React from 'react';
+// UserProjects.js
 
-const UserProjects = ({ userProjects, projects }) => {
-  const userProjectsData = userProjects.map((projectId) =>
-    projects.find((project) => project.id === projectId)
-  );
+import React from 'react';
+import { Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
+import { GenerateMockProjects } from '../../../Services/utils/GenerateMockProjects'; // Import the mock project data generator
+import './style.css'; // Import the external CSS file for styling
+
+const UserProjects = () => {
+  const mockProjects = GenerateMockProjects(); // Generate mock project data
 
   return (
     <div className="projects-section">
-      <h2>Projects</h2>
-      <ul>
-        {userProjectsData.map((project) => (
-          <li key={project.id}>
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-          </li>
-        ))}
-      </ul>
+      <h2>Projects user is a part of</h2>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Title</TableCell>
+            <TableCell>Description</TableCell>
+            <TableCell>Members</TableCell>
+            <TableCell>Project Leader</TableCell>
+            <TableCell>Members</TableCell>
+            <TableCell>leave Project</TableCell>{/**aqui ou se faz hover para se sair do projeto ou tem um botão para sair */}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {mockProjects.map((project) => (
+            <TableRow key={project.id}>
+              <TableCell>{project.title}</TableCell>
+              <TableCell>{project.description}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 };

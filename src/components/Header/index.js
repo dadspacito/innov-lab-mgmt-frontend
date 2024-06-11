@@ -9,11 +9,15 @@ import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem, Avatar
 import MenuIcon from '@mui/icons-material/Menu';
 import {usePageNavigation} from '../../Services/utils/PageNavigation';
 import './style.css'
+import { useNavigate } from 'react-router-dom';
 
 //função para verificar se o user está logado
 //teria de user o que, um token?
 //tem de ter aqui um navigate para ir para as páginas dos admins e afins. Select que leva às várias páginas 
 /**IMPORTANTE, AS FUNÇÕES DE LOGICA SÃO COLOCADAS FORA DO COMPONENTE PARA PODEREM SER EXPORTADAS E TESTADAS MAIS FACILMENTE */
+
+
+//é preciso um servico que va buscar o user pelo token
 
 export function verifyLoggedInUser(token){
     if (token !== null){
@@ -28,8 +32,9 @@ export function verifyLoggedInUser(token){
 
 //preciso de algum props aqui?
 //aqui tem de levar o props do user estar logged in;
-const Header =({isUserOn, userName})=>{
+const Header =({isUserOn, userName, user})=>{
     const navigateToPage = usePageNavigation();
+    const navigate = useNavigate();
     
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -83,6 +88,8 @@ const Header =({isUserOn, userName})=>{
     };
     const handleUserClick = () => {
       console.log("User's name clicked!");
+      console.log(user);
+      navigate('/userProfile',{state:{user}})
   };
     
 return(
