@@ -26,6 +26,7 @@ import ErrorBoundary from './../../Services/utils/ErrorBoundary'
 const ProjectCreationWizard = ()=>{
     const [step, setStep] =  useState(1);
     const [formData, setFormData] = useState({
+        //editar projeto quando se cria na pagina do projeto 
         name:'',
         description:'',
         location:'',//este é uma int/id de uma localização da tabela de localizações

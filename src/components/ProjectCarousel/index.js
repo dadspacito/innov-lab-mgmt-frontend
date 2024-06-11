@@ -46,7 +46,7 @@ const ProjectCarousel = ({ projects, isUserOn }) => {
         <Slider {...settings} className="carouselContainer">
             {projects.map(project => (
                 <div key={project.id} className="projectWrapper">
-                    <ProjectDiv title={project.title} description={project.description} isUserOn = {isUserOn} />
+                    <ProjectDiv title={project.title} description={project.description} isUserOn = {isUserOn} projectTags = {project.tags} />
                 </div>
             ))}
         </Slider>
