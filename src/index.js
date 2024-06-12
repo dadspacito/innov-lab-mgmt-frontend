@@ -11,6 +11,7 @@ import ProjectList from "./pages/AllProjects";
 import ProjectCreationWizard from "./pages/ProjectCreation";
 import UserProfile from "./pages/UserProfile";
 import RecoverPassword from "./pages/RecoverPassword";
+import MaterialsList from "./pages/ProjectMaterials";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -24,6 +25,7 @@ root.render(
         <Route path = '/createProject' element ={<ProjectCreationWizard />}/>
         <Route path = '/userProfile' element = {<UserProfile/>}/>
         <Route path ='/recoverpassword' element = {<RecoverPassword />}/>
+        <Route path ='/materialsPage' element = {<MaterialsList/>}/>
       </Routes>
     </Router>
 );

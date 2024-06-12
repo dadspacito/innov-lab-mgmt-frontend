@@ -1,0 +1,64 @@
+/* style.css */
+
+/* Make the container for the form smaller and enable scrolling */
+.material-creation-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+    max-height: 80vh; /* Limit the height to 80% of the viewport */
+    padding: 10px;
+}
+
+/* Adjust font size for input fields and labels */
+.material-creation-form .MuiTextField-root {
+    font-size: 0.9rem; /* Smaller font size for text fields */
+}
+
+.material-creation-form .MuiFormLabel-root {
+    font-size: 0.8rem; /* Smaller font size for labels */
+}
+
+/* Adjust button size and text */
+.material-creation-form .MuiButton-root {
+    font-size: 0.9rem; /* Smaller font size for the button text */
+    padding: 8px; /* Smaller padding for the button */
+}
+
+/* Apply general styling for the grid items to be more compact */
+.material-creation-form .MuiGrid-item {
+    padding: 4px; /* Less padding between grid items */
+}
+
+/* Add styles to the modal box to ensure it handles small screens well */
+.modal-box {
+    overflow-y: auto; /* Enable vertical scrolling for the modal content */
+    max-height: 80vh; /* Limit the height to 80% of the viewport */
+    width: 90vw; /* Make it adapt to smaller screens, max 90% of viewport width */
+}
+
+/* Style for smaller screens */
+@media (max-width: 600px) {
+    .modal-box {
+        width: 100%; /* Use full width on small screens */
+        height: 100%; /* Use full height on small screens */
+        max-height: none; /* Disable max-height for small screens */
+        padding: 20px;
+    }
+}
+
+/* Extra responsive adjustments if needed */
+@media (max-width: 960px) {
+    .material-creation-form .MuiTextField-root {
+        font-size: 0.8rem; /* Smaller font size for text fields on medium screens */
+    }
+
+    .material-creation-form .MuiFormLabel-root {
+        font-size: 0.7rem; /* Smaller font size for labels on medium screens */
+    }
+
+    .material-creation-form .MuiButton-root {
+        font-size: 0.8rem; /* Smaller font size for the button text on medium screens */
+        padding: 6px; /* Smaller padding for the button on medium screens */
+    }
+}

@@ -1,0 +1,44 @@
+.materials-list-container {
+    padding: 20px;
+    position: relative;
+}
+
+.controls-container {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px; /* Add gap between the controls */
+}
+
+.create-material-button {
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+
+.fab-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.modal-box {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.material-creation-form {
+    max-height: 100%;
+}
+
+.materials-table-container {
+    margin-top: 20px;
+    padding: 20px;
+}
+
+button.create-material-button .MuiButton-startIcon {
+    margin-right: 8px;
+}
+
+button.create-material-button svg {
+    font-size: 1.2rem; /* Adjust the icon size */
+}

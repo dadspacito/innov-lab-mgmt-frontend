@@ -35,6 +35,8 @@ export function usePageNavigation() {
         case 'recoverPassword':
           navigate('/recoverpassword', {replace:true})
           break;
+        case 'materials':
+          navigate('/materialsPage', {replace:true})
         default:
           console.log('Default case called in the navigateToPage function');
           break;
