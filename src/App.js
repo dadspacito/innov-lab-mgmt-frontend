@@ -1,10 +1,12 @@
-import "./App.css";
-import LoginForm from "./pages/login";
+import React from 'react';
+import './App.css';
+import RoutesApp from './Services/utils/RoutesApp';
+
+// App component acting as a wrapper for the RoutesApp
 function App() {
-  //aqui a landing page é que tem de ser a primeira que se abre
   return (
-    <LoginForm/>
-  )  
+    <RoutesApp />
+  );
 }
 
 export default App;

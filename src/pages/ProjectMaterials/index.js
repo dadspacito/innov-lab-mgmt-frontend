@@ -33,11 +33,13 @@ const MaterialsList = () => {
     // Handle filter type change
     const handleFilterTypeChange = (event) => {
         setFilterType(event.target.value);
+        
     };
 
     // Filter and search materials based on the selected filter type and search query
     useEffect(() => {
         let updatedMaterials = materials;
+        //esta função nao esta a fazer update a lista
         if (filterType !== 'All') {
             updatedMaterials = updatedMaterials.filter(material => material.type === filterType);
         }
