@@ -10,7 +10,7 @@ import UserProfile from "../../../pages/UserProfile";
 import RecoverPassword from "../../../pages/RecoverPassword";
 import MaterialsList from "../../../pages/ProjectMaterials";
 import Header from "../../../components/Header";
-//perceber melhor o que faz o browserRouter 
+
 
 function RoutesApp(){
     return(
