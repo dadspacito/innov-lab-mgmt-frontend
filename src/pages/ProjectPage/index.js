@@ -14,7 +14,7 @@
 /**
  * membros do projeto, tabela com os membros (array que recebe de trás)
  */
-import React from 'react';
+import React, {useState, useRef} from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box, Typography, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,IconButton  } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
@@ -26,6 +26,8 @@ const ProjectPage = () => {
     // Use `useLocation` to get project details from navigation state
     const location = useLocation();
     const project = location.state?.project || {}; // Fallback to an empty object if no project data
+    const [ganttDimensions, setGanttDimensions] = useState({ width: '100%', height: 400 });
+    const ganttRef = useRef(null);
     const handleCreateTask = () => {
         // Placeholder logic for creating a new task
         console.log('Creating a new task...');
@@ -71,8 +73,8 @@ const ProjectPage = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {project.tasks?.map((task, index) => (
-                                    <TableRow key={index}>
+                                {project.tasks?.map((task) => (
+                                    <TableRow key={task.id}>
                                         <TableCell>{task.name}</TableCell>
                                         <TableCell>{task.startDate}</TableCell>
                                         <TableCell>{task.endDate}</TableCell>
@@ -88,7 +90,8 @@ const ProjectPage = () => {
                 </Paper>
             </Box>
 
-            <Box sx={{ marginBottom: '20px' }}>
+           {/* Gantt Chart Section */}
+           <Box sx={{ marginBottom: '20px' }} ref={ganttRef}>
                 <Typography variant="h4" component="h1">Gantt Chart</Typography>
                 <Paper sx={{ padding: '20px', marginTop: '10px' }}>
                     <Gantt
@@ -97,12 +100,14 @@ const ProjectPage = () => {
                             name: task.name,
                             start: new Date(task.startDate),
                             end: new Date(task.endDate),
-                            progress: task.progress || 0, // Default to 0 if no progress is defined
+                            progress: task.progress || 0,
                         }))}
                         dependencies={project.dependencies || []}
-                        options={{ 
-                            taskHeight: 30,
-                            viewMode: 'Day' // Customize view mode as needed
+                        options={{
+                            taskHeight: 20,
+                            viewMode: 'Week',
+                            width: ganttDimensions.width,
+                            height: ganttDimensions.height,
                         }}
                     />
                 </Paper>
