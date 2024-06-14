@@ -16,7 +16,8 @@
  */
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { Box, Typography, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Box, Typography, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,IconButton  } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import { Gantt, Task, EventOption, StylingOption, ViewMode, DisplayOption } from 'gantt-task-react';
 import "gantt-task-react/dist/index.css";
 import PropTypes from 'prop-types';
@@ -25,6 +26,10 @@ const ProjectPage = () => {
     // Use `useLocation` to get project details from navigation state
     const location = useLocation();
     const project = location.state?.project || {}; // Fallback to an empty object if no project data
+    const handleCreateTask = () => {
+        // Placeholder logic for creating a new task
+        console.log('Creating a new task...');
+    };
     
 
     return (
@@ -46,7 +51,11 @@ const ProjectPage = () => {
 
             {/* Task Table Section */}
             <Box sx={{ marginBottom: '20px' }}>
-                <Typography variant="h4" component="h1">Task Table</Typography>
+                <Typography variant="h4" component="h4">Task Table</Typography>
+                <IconButton onClick={handleCreateTask} color="primary" aria-label="add task">
+                    <AddIcon />
+                    <Typography variant="body1" sx={{ marginLeft: '8px' }}>New Task</Typography>
+                </IconButton>
                 <Paper sx={{ padding: '20px', marginTop: '10px' }}>
                     <TableContainer>
                         <Table>
@@ -79,15 +88,25 @@ const ProjectPage = () => {
                 </Paper>
             </Box>
 
-            {/* Gantt Chart Section */}
-            {/* <Box sx={{ marginBottom: '20px' }}>
+            <Box sx={{ marginBottom: '20px' }}>
                 <Typography variant="h4" component="h1">Gantt Chart</Typography>
                 <Paper sx={{ padding: '20px', marginTop: '10px' }}>
                     <Gantt
-                        tasks={project.tasks} // 
+                        tasks={project.tasks.map(task => ({
+                            id: task.id,
+                            name: task.name,
+                            start: new Date(task.startDate),
+                            end: new Date(task.endDate),
+                            progress: task.progress || 0, // Default to 0 if no progress is defined
+                        }))}
+                        dependencies={project.dependencies || []}
+                        options={{ 
+                            taskHeight: 30,
+                            viewMode: 'Day' // Customize view mode as needed
+                        }}
                     />
                 </Paper>
-            </Box> */}
+            </Box>
 
             {/* Project Members Section */}
             <Box sx={{ marginBottom: '20px' }}>
