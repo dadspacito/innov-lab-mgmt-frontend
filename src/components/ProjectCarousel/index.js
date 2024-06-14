@@ -2,10 +2,12 @@ import React from 'react';
 import Slider from 'react-slick';
 import PropTypes from 'prop-types';
 import ProjectDiv from '../projectDiv'; // Ensure the correct path to ProjectDiv
+import { useNavigate } from 'react-router-dom';
 import './style.css'
 
 //este componente tem de receber o user is logged on 
 const ProjectCarousel = ({ projects, isUserOn }) => {
+    const navigate = useNavigate();
     const settings = {
         dots: true,
         infinite: true,
@@ -42,10 +44,16 @@ const ProjectCarousel = ({ projects, isUserOn }) => {
         ]
     };
 
+    //onClick que redireciona para a página do projeto 
+    const handleProjectClick = (project) => {
+        navigate('/projectPage', { state: { project } });
+    };
+    //no project div está se a fazer props driiling e é preferivel expandir o projecto la dentro 
+
     return (
-        <Slider {...settings} className="carouselContainer">
+        <Slider {...settings} className="carouselContainer" >
             {projects.map(project => (
-                <div key={project.id} className="projectWrapper">
+                <div key={project.id} className="projectWrapper" onClick={()=>handleProjectClick(project)}>
                     <ProjectDiv title={project.title} description={project.description} isUserOn = {isUserOn} projectTags = {project.tags} />
                 </div>
             ))}

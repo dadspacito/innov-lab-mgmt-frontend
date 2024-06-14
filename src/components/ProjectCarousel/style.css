@@ -19,5 +19,20 @@
       flex-direction: column; /* Display items vertically */
     }
   }
+  .carouselContainer .projectWrapper {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+.carouselContainer .projectWrapper:hover {
+    transform: scale(1.05); /* Slightly enlarge the element */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Add a shadow */
+    filter: brightness(1.2); /* Increase brightness */
+}
+
+/* Optional: Add a subtle border or change in background color */
+.carouselContainer .projectWrapper:hover {
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+}
   
 
