@@ -1,17 +1,22 @@
 import React from "react";
 import { TextField, Button, Box, Typography, Container } from "@mui/material";
 import { usePageNavigation, } from '../../Services/utils/PageNavigation';
+import Login from './../../Services/API/LoginAPI';
 
 const LoginForm = () => {
   //const navigate = useNavigate();
   const navigateToPage = usePageNavigation();
-
+  //isto 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    //aqui chama o serviço de login 
     const email = data.get("email");
     const password = data.get("password");
-    navigateToPage('homepage')
+    Login.logInUser(email, password);
+
+    
+    // navigateToPage('homepage')
     // Lógica de autenticação aqui
     //verifica se existe no backend um email e password com este nome para poder entrar na app
     console.log(email + " " + password);
