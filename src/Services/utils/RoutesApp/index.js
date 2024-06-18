@@ -10,7 +10,8 @@ import UserProfile from "../../../pages/UserProfile";
 import RecoverPassword from "../../../pages/RecoverPassword";
 import MaterialsList from "../../../pages/ProjectMaterials";
 import Header from "../../../components/Header";
-//perceber melhor o que faz o browserRouter 
+import ProjectPage from "../../../pages/ProjectPage";
+
 
 function RoutesApp(){
     return(
@@ -26,6 +27,7 @@ function RoutesApp(){
             <Route path = '/userProfile' element = {<UserProfile/>}/>
             <Route path ='/recoverpassword' element = {<RecoverPassword />}/>
             <Route path ='/materialsPage' element = {<MaterialsList/>}/>
+            <Route path = '/projectPage' element = {<ProjectPage/>} />
       </Routes>
         </BrowserRouter>
     )
