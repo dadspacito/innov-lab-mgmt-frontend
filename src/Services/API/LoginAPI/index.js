@@ -15,7 +15,7 @@ const Login = {
             console.log('Response status:', response.status);
 
             // Check the response status
-            if (response.status === 200) { // Successfully authenticated
+            if (response.status === 201) { // Successfully authenticated
                 console.log('User logs in');
                 return true;
             } else if (response.status === 401) { // Unauthorized
