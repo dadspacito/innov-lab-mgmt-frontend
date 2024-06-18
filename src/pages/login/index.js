@@ -13,13 +13,14 @@ const LoginForm = () => {
     //aqui chama o serviço de login 
     const email = data.get("email");
     const password = data.get("password");
-    Login.logInUser(email, password);
+    if (Login.logInUser(email, password)){
+      //alterar o modo de navegação
+      navigateToPage('homepage')
+    }
+    else console.log("wrong credentials");
 
     
-    // navigateToPage('homepage')
-    // Lógica de autenticação aqui
-    //verifica se existe no backend um email e password com este nome para poder entrar na app
-    console.log(email + " " + password);
+    
   }
 
 

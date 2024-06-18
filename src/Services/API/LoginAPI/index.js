@@ -35,7 +35,15 @@ const Login = {
             console.error('Something went wrong:', error);
             return false; // Return false in case of a catch
         }
-    }
+    },
+    // RegisterUser: async (user)=>{
+    //     try{
+    //         const response = await fetch ('https://localhost:8443/innovlab/api/sessions',{
+
+    //         })
+    //     }
+
+    // }
 };
 
 export default Login;
