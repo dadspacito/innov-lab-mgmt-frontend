@@ -11,12 +11,18 @@ import RecoverPassword from "../../../pages/RecoverPassword";
 import MaterialsList from "../../../pages/ProjectMaterials";
 import Header from "../../../components/Header";
 import ProjectPage from "../../../pages/ProjectPage";
+import { userStore } from "../../Store/userStore";
 
 
 function RoutesApp(){
+    const user = userStore((state)=>state.user);
+    const isUserLoggedIn = user && user.nickname; // Adjust the condition based on your user's structure
+    console.log(user);
+
+    //o nickname pode sair, é so o {...user}
     return(
         <BrowserRouter>
-        <Header />
+        <Header isUserOn={isUserLoggedIn} userName={isUserLoggedIn ? user.nickname : ""} user ={isUserLoggedIn ? { ...user } : null} />
         <Routes>
             <Route path='/' element ={<Homepage/>}/>        
             <Route path="/registry" element={<RegistryForm/>} />

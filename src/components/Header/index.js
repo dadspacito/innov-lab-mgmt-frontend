@@ -91,6 +91,8 @@ const Header =({isUserOn, userName, user})=>{
       console.log(user);
       navigate('/userProfile',{state:{user}})
   };
+
+  //a função de logout aqui tem de ser especifica porque vai fazer um fetch das credenciais, tem de apagar o user da store e fazer reload da pagina
     
 return(
     <AppBar position="static"> {/*//esta appbar significa o que? qual é a diferença entre isto e o header?*/}

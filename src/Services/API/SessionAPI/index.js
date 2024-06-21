@@ -1,4 +1,9 @@
-const Login = {
+import { userStore } from "../../Store/userStore";
+
+
+//const userToken = userStore((state)=>state.updateUserToken)
+export const SessionAPI = {
+    
     // POST to send user credentials
     logInUser: async (email, password) => {
         try {
@@ -16,7 +21,10 @@ const Login = {
 
             // Check the response status
             if (response.status === 201) { // Successfully authenticated
-                console.log('User logs in');
+                const data = await response.json();
+                console.log(data.token);
+                //userToken(data.token);
+                
                 return true;
             } else if (response.status === 401) { // Unauthorized
                 console.error('Unauthorized: Incorrect email or password');
@@ -36,14 +44,26 @@ const Login = {
             return false; // Return false in case of a catch
         }
     },
-    // RegisterUser: async (user)=>{
-    //     try{
-    //         const response = await fetch ('https://localhost:8443/innovlab/api/sessions',{
-
-    //         })
-    //     }
-
-    // }
+    LogOutUser: async (token)=>{
+        try{
+            const response = await fetch('https://localhost:8443/innovlab/api/sessions',{
+                method:'DELETE',
+                headers:{
+                    'Accept': '*/*',
+                    'Content-Type': 'application/json',
+                    'token':token
+                },
+            });
+            if (response.status === 200){
+                console.log('user sucessfully logged out');
+                return true
+            }
+        }
+        catch(error){
+            console.error('Something went wrong:', error);
+            return false; // Return false in case of a catch
+        }
+    }
 };
 
-export default Login;
+

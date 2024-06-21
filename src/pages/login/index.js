@@ -1,28 +1,42 @@
-import React from "react";
-import { TextField, Button, Box, Typography, Container } from "@mui/material";
+import React, {useState} from "react";
+import { TextField, Button, Box, Typography, Container, Alert } from "@mui/material";
 import { usePageNavigation, } from '../../Services/utils/PageNavigation';
-import Login from './../../Services/API/LoginAPI';
+import {SessionAPI} from '../../Services/API/SessionAPI';
+import { UserAPI } from "../../Services/API/UserAPI";
+import { userStore } from "../../Services/Store/userStore";
 
 const LoginForm = () => {
   //const navigate = useNavigate();
   const navigateToPage = usePageNavigation();
-  //isto 
-  const handleSubmit = (event) => {
+  const storeUser = userStore((state)=>state.updateUser)
+  const [errorMessage, setErrorMessage] = useState("");
+
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     //aqui chama o serviço de login 
     const email = data.get("email");
     const password = data.get("password");
-    if (Login.logInUser(email, password)){
-      //alterar o modo de navegação
-      navigateToPage('homepage')
+
+    try {
+      // Attempt to log in the user
+      const loginSuccess = await SessionAPI.logInUser(email, password);
+
+      if (loginSuccess) {
+        // Fetch user data if login is successful
+        const dataUser = await UserAPI.getUserByEmail(email);
+        storeUser(dataUser); // Store user data in the state
+        navigateToPage('homepage'); // Navigate to the homepage
+      } else {
+        // Show error message if login fails
+        setErrorMessage("Invalid email or password. Please try again.");
+      }
+    } catch (error) {
+      console.error('Something went wrong during login:', error);
+      setErrorMessage("An error occurred during login. Please try again.");
     }
-    else console.log("wrong credentials");
-
-    
-    
-  }
-
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -37,6 +51,11 @@ const LoginForm = () => {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
+        {errorMessage && (
+          <Alert severity="error" sx={{ mt: 2 }}>
+            {errorMessage}
+          </Alert>
+        )}
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"

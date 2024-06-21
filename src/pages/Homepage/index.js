@@ -17,6 +17,7 @@ import { usePageNavigation, } from '../../Services/utils/PageNavigation';
 import DescriptionSection from '../../components/DescriptionSection';
 import GenerateMockUsers from '../../Services/utils/GenerateMockUsers';
 import { useState } from 'react'
+import { userStore } from '../../Services/Store/userStore';
 
 const mockUser = GenerateMockUsers();
 const projects = GenerateMockProjects();
@@ -41,6 +42,8 @@ const Homepage = ()=>{
         if (firstUser) {
             setUser(firstUser);
         }
+    
+
     }, []);
 
     const handleUserOn = () => {
