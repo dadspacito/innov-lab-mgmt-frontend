@@ -1,6 +1,8 @@
-import {React, useState} from 'react';
-import { TextField, Button, Box, Typography, Container} from "@mui/material";
+import {React, useState, useEffect} from 'react';
+import { TextField, Button, Box, Typography, Container,Select, MenuItem, FormControl, InputLabel} from "@mui/material";
 import {useNavigate} from 'react-router-dom'
+import { LocationAPI } from '../../Services/API/LocationAPI';
+import {SystemAPI} from '../../Services/API/SystemAPI'
 
 
 /**funções para exportar, ficam mais facilmente testaveis */
@@ -14,28 +16,20 @@ export function passwordConfirmation(password, confirmPassword){
 
 //handles email validation
  export function emailValidation(email){
-    if (!email || email.length === 0 || !/@/.test(email) || /\s/.test(email)){
-        switch(true){
-            case !email:
-                console.log('email is empty or undefined');
-                return false;
-            case email.length === 0:
-                console.log('email length is 0')
-                return false;
-            case !/@/.test(email):
-                console.log("there is no @ in your email");
-                return false;
-            case /\s/.test(email):
-                console.log('spaces are not allowed in the email');
-                return false;
-            default:
-                console.log("there are other validation errors in your email");
-                return false;
-        }
+    if (!email) {
+        console.log('email is empty or undefined');
+        return false;
     }
-    else {
-        return true;
+    else if (!/@/.test(email)) {
+        console.log("there is no @ in your email");
+        return false;
     }
+    else if (/\s/.test(email)) {
+        console.log('spaces are not allowed in the email');
+        return false;
+    }
+    else
+    return true;
 }
 //handles password validation (rules for password input, not comparison with the confirm password field)
 export function passwordValidation(password){
@@ -81,15 +75,32 @@ export function credentialConfirmation(password, confirmPassword, email){
 
 /**COMPONENTE */
 const RegistryForm = () =>{
+    //tem de ir buscar as localizações
     const navigate = useNavigate();
+    const [locations, setLocations]= useState([]);
     //user object that will be sent to backend
     const [user, setUser] = useState({
         firstName:'',
         lastName:'',
-        username:'',
+        nickname:'',
         email:'',
         password:'',
+        workplaceId:'',
     });
+
+
+    useEffect(() => {
+        //vai buscar as localizações à db
+        const fetchLocations = async () => {
+            try {
+                const response = await LocationAPI.GetLocations();
+                setLocations(response);
+            } catch (error) {
+                console.error('Failed to fetch locations:', error);
+            }
+        };
+        fetchLocations();
+    }, []);
 
     //NAVEGAÇÂO
     const goToLogin =()=>{
@@ -104,6 +115,7 @@ const RegistryForm = () =>{
     //handle inputs for registry
     const handleChange = (e) => {
         const { name, value } = e.target;
+        console.log(`Setting ${name} to ${value}`);
         setUser({ ...user, [name]: value });
     };
 
@@ -112,6 +124,10 @@ const RegistryForm = () =>{
         const {value} = e.target;
         setConfirmPassword(value);
     }
+    const handleLocationChange = (e) => {
+        const selectedLocationId = e.target.value;
+        setUser({ ...user, workplaceId: selectedLocationId });
+    };
     /**
      * handle registry credentials
      * if password does not match, return something (can be a function)
@@ -122,10 +138,20 @@ const RegistryForm = () =>{
      */
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log(user);
         setFormSubmitted(true);
-        if (credentialConfirmation()){
-            goToLogin();
-            console.log('user sucessfully registered')
+        if (credentialConfirmation(confirmPassword, user.password, user.email)){
+            //chama aqui o pedido de registo de utilizador 
+            try{
+                SystemAPI.RegisterUser(user);
+            } catch (error) {
+                console.error('Failed to post user to db:', error);
+            }
+
+
+            //goToLogin();
+            
+            
         }
         else console.log('error registering user');
     };
@@ -176,10 +202,10 @@ const RegistryForm = () =>{
                         margin="normal"
                         required
                         fullWidth
-                        id="Username"
-                        label="Username"
-                        name="username"
-                        value={user.username}
+                        id="Nickname"
+                        label="Nickname"
+                        name="nickname"
+                        value={user.nickname}
                         onChange={handleChange}
                         inputProps={{
                             "data-testid":"username-input"
@@ -202,6 +228,31 @@ const RegistryForm = () =>{
                             "data-testid":"email-input"
                         }}
                     />
+                    {/* Select for Location */}
+                    <FormControl fullWidth margin="normal">
+                        <InputLabel id="location-label">Location</InputLabel>
+                        <Select
+                            labelId="location-label"
+                            id="workplaceId"
+                            name="workplaceId"
+                            value={user.workplaceId}
+                            onChange={handleLocationChange}
+                            label="Location"
+                            inputProps={{
+                                "data-testid": "location-select"
+                            }}
+                        >
+                            {/* Placeholder option */}
+                            <MenuItem value="" disabled>
+                                Select a location
+                            </MenuItem>
+                            {locations.map((location) => (
+                                <MenuItem key={location.id} value={location.id}>
+                                    {location.location}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
                     <TextField
                         margin="normal"
                         required
@@ -238,6 +289,7 @@ const RegistryForm = () =>{
                             "data-testid":"confirm-password-input"
                         }}
                     />
+                    
                     <Button
                         type="submit"
                         fullWidth

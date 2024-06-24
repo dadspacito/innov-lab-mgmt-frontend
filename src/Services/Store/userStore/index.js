@@ -8,14 +8,14 @@ export const userStore = create (
     persist(
         (set) =>({
             user:{},
-            username:"",
             userToken:"",
-            userEmail:"",
-            updateUsername:(username) =>set({username}),
             updateUserToken:(userToken)=>set({userToken}),
-            updateUserEmail:(userEmail)=>set({userEmail}),
             updateUser:(user)=>set({user}),
-            clearUser:(user)=>set({})
+
+            clearUser:()=>set({
+                user:{},
+                userToken:"",
+             })
         }),
         {
             name:'userStore',

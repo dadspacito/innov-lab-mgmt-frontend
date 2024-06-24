@@ -5,7 +5,7 @@ import { usePageNavigation, } from '../../Services/utils/PageNavigation';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // Mock users for demonstration
-const mockUsers = GenerateMockUsers();
+//const mockUsers = GenerateMockUsers();
 
 
 const RecoverPassword = () => {
@@ -15,10 +15,6 @@ const RecoverPassword = () => {
     const [error, setError] = useState(null);
     const navigateToPage = usePageNavigation();
 
-   useEffect(() => {
-        console.log(mockUsers);
-    }, []);
-
     const handleChange = (event) => {
         setEmail(event.target.value);
     }
@@ -26,16 +22,16 @@ const RecoverPassword = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         // Check if the email exists in the mock users
-        const user = mockUsers.find(user => user.email === email);
-        if (user) {
-            setEmailExists(true);
-            setShowModal(true);
-            setError(null);
-            navigateToPage('login');
-        } else {
-            setEmailExists(false);
-            setError("The provided email does not exist.");
-        }
+        // const user = mockUsers.find(user => user.email === email);
+        // if (user) {
+        //     setEmailExists(true);
+        //     setShowModal(true);
+        //     setError(null);
+        //     navigateToPage('login');
+        // } else {
+        //     setEmailExists(false);
+        //     setError("The provided email does not exist.");
+        // }
     }
 
     const handleCloseModal = () => {

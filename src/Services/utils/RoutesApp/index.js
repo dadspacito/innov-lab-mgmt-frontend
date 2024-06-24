@@ -12,6 +12,7 @@ import MaterialsList from "../../../pages/ProjectMaterials";
 import Header from "../../../components/Header";
 import ProjectPage from "../../../pages/ProjectPage";
 import { userStore } from "../../Store/userStore";
+import Activation from "../../../pages/ActivateAccount";
 
 
 function RoutesApp(){
@@ -34,6 +35,7 @@ function RoutesApp(){
             <Route path ='/recoverpassword' element = {<RecoverPassword />}/>
             <Route path ='/materialsPage' element = {<MaterialsList/>}/>
             <Route path = '/projectPage' element = {<ProjectPage/>} />
+            <Route path ="/users/activations/:emailtoken" element={<Activation />} />
       </Routes>
         </BrowserRouter>
     )

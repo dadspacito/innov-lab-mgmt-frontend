@@ -8,35 +8,58 @@ import { userStore } from "../../Services/Store/userStore";
 const LoginForm = () => {
   //const navigate = useNavigate();
   const navigateToPage = usePageNavigation();
-  const storeUser = userStore((state)=>state.updateUser)
+  const storeUser = userStore((state)=>state.updateUser);
+  const userToken = userStore((state)=>state.updateUserToken);
   const [errorMessage, setErrorMessage] = useState("");
+  
 
 
+  //tem de ser pelo serviço de session, nao do user. O que retorna o token e o token timeout
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    //aqui chama o serviço de login 
     const email = data.get("email");
     const password = data.get("password");
 
     try {
-      // Attempt to log in the user
-      const loginSuccess = await SessionAPI.logInUser(email, password);
+        // Call the login API
+        const loginResponse = await SessionAPI.logInUser(email, password);
 
-      if (loginSuccess) {
-        // Fetch user data if login is successful
-        const dataUser = await UserAPI.getUserByEmail(email);
-        storeUser(dataUser); // Store user data in the state
-        navigateToPage('homepage'); // Navigate to the homepage
-      } else {
-        // Show error message if login fails
-        setErrorMessage("Invalid email or password. Please try again.");
-      }
+        if (loginResponse.success) {
+            const userData = loginResponse.data;
+            // Store user data in the state
+            storeUser(userData);
+            // Here userToken should be handled properly, using a let or a state
+            // if userToken is part of userStore, consider using updateUserToken
+
+            // Update the user token if necessary
+            if (userData.token) {
+                userStore.getState().updateUserToken(userData.token); // or use set method for storing token
+            }
+
+            navigateToPage('homepage'); // Navigate to the homepage
+        } else {
+            // Show error message based on the error type
+            switch (loginResponse.error) {
+                case 'Unauthorized':
+                    setErrorMessage("Invalid email or password. Please try again.");
+                    break;
+                case 'Forbidden':
+                    setErrorMessage("You do not have permission to access this application.");
+                    break;
+                case 'Not Found':
+                    setErrorMessage("The login service is currently unavailable.");
+                    break;
+                default:
+                    setErrorMessage("An error occurred during login. Please try again.");
+                    break;
+            }
+        }
     } catch (error) {
-      console.error('Something went wrong during login:', error);
-      setErrorMessage("An error occurred during login. Please try again.");
+        console.error('Something went wrong during login:', error);
+        setErrorMessage("An error occurred during login. Please try again.");
     }
-  };
+};
 
   return (
     <Container component="main" maxWidth="xs">

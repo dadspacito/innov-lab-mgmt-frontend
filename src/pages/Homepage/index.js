@@ -19,7 +19,9 @@ import GenerateMockUsers from '../../Services/utils/GenerateMockUsers';
 import { useState } from 'react'
 import { userStore } from '../../Services/Store/userStore';
 
-const mockUser = GenerateMockUsers();
+
+//DADOS PARA TESTES
+// const mockUser = GenerateMockUsers();
 const projects = GenerateMockProjects();
 
 
@@ -36,23 +38,25 @@ const Homepage = ()=>{
 
     //RETORNA USER vai buscar o user para fazer set
     //cmd + k + c para commentar blocos de codigo
-    useEffect(() => {
-        // Set the user to the first mock user with id 1
-        const firstUser = mockUser.find(user => user.id === 1);
-        if (firstUser) {
-            setUser(firstUser);
-        }
+    // useEffect(() => {
+    //     // Set the user to the first mock user with id 1
+    //     const firstUser = mockUser.find(user => user.id === 1);
+    //     if (firstUser) {
+    //         setUser(firstUser);
+    //     }
     
 
-    }, []);
+    // }, []);
 
-    const handleUserOn = () => {
-        // Toggle the isUserOn state
-        setUserOn(prevState => !prevState);
-    };
-    useEffect(() => {
-        console.log('Homepage isUserOn state:', isUserOn);
-    }, [isUserOn]);
+
+    //este foi so mock para ver se o user funcionava quando alterava o botão
+    // const handleUserOn = () => {
+    //     // Toggle the isUserOn state
+    //     setUserOn(prevState => !prevState);
+    // };
+    // useEffect(() => {
+    //     console.log('Homepage isUserOn state:', isUserOn);
+    // }, [isUserOn]);
 
 
 
@@ -72,10 +76,6 @@ const Homepage = ()=>{
                 <Button onClick={handleCreateNewProject} variant="contained" color="primary">
                     Create New Project
                 </Button>
-                <Button onClick={handleUserOn} variant="contained" color="primary">
-                {isUserOn ? 'Log Out Admin' : 'Log In as Admin'}
-                </Button>
-            
             </Box>
         </Box>
     </>

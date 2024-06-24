@@ -10,7 +10,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import {usePageNavigation} from '../../Services/utils/PageNavigation';
 import './style.css'
 import { useNavigate } from 'react-router-dom';
-
+import {SessionAPI} from '../../Services/API/SessionAPI';
+import { userStore } from "../../Services/Store/userStore";
 //função para verificar se o user está logado
 //teria de user o que, um token?
 //tem de ter aqui um navigate para ir para as páginas dos admins e afins. Select que leva às várias páginas 
@@ -18,18 +19,6 @@ import { useNavigate } from 'react-router-dom';
 
 
 //é preciso um servico que va buscar o user pelo token
-
-export function verifyLoggedInUser(token){
-    if (token !== null){
-        //retorna true para devolver o valor ou pode devolver o token e faz set a esse token
-        //ou retorna o user integral
-        //posso chamar aqui o set state?
-        //esta função retorna um user. podemos fazer set state do retorno desta função
-        return true; //trocar por user
-    }
-    else return false;
-}
-
 //preciso de algum props aqui?
 //aqui tem de levar o props do user estar logged in;
 const Header =({isUserOn, userName, user})=>{
@@ -42,6 +31,7 @@ const Header =({isUserOn, userName, user})=>{
     const [showIcon, setShowIcon] = useState(false);
     const anchorRef = useRef(null);
     const mockUserPicture = 'https://static-00.iconduck.com/assets.00/avatar-default-icon-2048x2048-h6w375ur.png'; // Placeholder image
+    const logout = userStore((state)=>state.clearUser);
 
     //aqui ha uma função que ao verificar se o user está logged in, retorna o set isLoggedIn como true ou false
     useEffect(() => {
@@ -93,6 +83,11 @@ const Header =({isUserOn, userName, user})=>{
   };
 
   //a função de logout aqui tem de ser especifica porque vai fazer um fetch das credenciais, tem de apagar o user da store e fazer reload da pagina
+  const handleLogout = async ()=>{
+    if (SessionAPI.LogOutUser(user.token)){
+        logout();
+    }
+  }
     
 return(
     <AppBar position="static"> {/*//esta appbar significa o que? qual é a diferença entre isto e o header?*/}
@@ -118,15 +113,15 @@ return(
                         <Button color="inherit" onClick={() => navigateToPage('homepage')}>
                             Home
                         </Button>
-                        <Button color="inherit" onClick={() => navigateToPage('about')}>
+                        {/* <Button color="inherit" onClick={() => navigateToPage('about')}>
                             About
-                        </Button>
+                        </Button> */}
                        
                         {isUserOn && (
                             <>
-                               <Button color="inherit" onClick={() => navigateToPage('userProfile')}>
+                               {/* <Button color="inherit" onClick={() => navigateToPage('userProfile')}>
                                     User Profile
-                                </Button>
+                                </Button> */}
                                 <Button color="inherit" onClick={() => navigateToPage('materials')}>
                                     Materials
                                 </Button>
@@ -155,8 +150,8 @@ return(
         >
             {/**aqui serão colocados as partes de navegação */}
           <MenuItem onClick={handleClose}>Home</MenuItem>
-          <MenuItem onClick={handleClose}>About</MenuItem>
-          <MenuItem onClick={handleClose}>Contact</MenuItem>
+          {/* <MenuItem onClick={handleClose}>About</MenuItem>
+          <MenuItem onClick={handleClose}>Contact</MenuItem> */}
         </Menu>
         {isUserOn ? (
                     <>
@@ -164,7 +159,7 @@ return(
                             <Avatar src={mockUserPicture || ''} sx={{ marginRight: '8px' }}>U</Avatar>
                             <Typography variant="body1" color="inherit">{userName || 'User'}</Typography>
                         </Box>
-                        <Button onClick={() => navigateToPage('logout')} color="inherit">Logout</Button>
+                        <Button onClick={handleLogout} color="inherit">Logout</Button>
                     </>
                 ) : (
                     <Button color="inherit" onClick={() => navigateToPage('login')}>Login / Sign In</Button>
