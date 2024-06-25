@@ -48,7 +48,6 @@ const ProjectList = () => {
     }
     return (
         <>
-        <Header />
         <div className="project-search-container">
         <SearchField data = {projects} onSearch={handleSearch}/>
         <div className="project-list-container"> {/* Apply container class */}

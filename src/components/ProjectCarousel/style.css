@@ -31,8 +31,48 @@
 
 /* Optional: Add a subtle border or change in background color */
 .carouselContainer .projectWrapper:hover {
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    background-color: #f8f9fa;
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.2);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  background-color: #f8f9fa;
+}
+/* Custom styling for the arrows */
+/* Custom styling for the arrows */
+.slick-prev,
+.slick-next {
+    z-index: 10; /* Ensure arrows are on top */
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    border-radius: 50%; /* Make the arrows circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* Make the arrows white */
+    position: absolute; /* Positioning arrows absolutely within the container */
+    top: 50%; /* Vertically center the arrows */
+    transform: translateY(-50%); /* Adjust for perfect centering */
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Darker on hover */
+}
+
+.slick-prev {
+    left: -25px; /* Move the left arrow outside the main container */
+}
+
+.slick-next {
+    right: -25px; /* Move the right arrow outside the main container */
+}
+
+/* Optional: Add hover effects to indicate interactability */
+.slick-prev:hover,
+.slick-next:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.8); /* Slightly darker on hover */
 }
   
 

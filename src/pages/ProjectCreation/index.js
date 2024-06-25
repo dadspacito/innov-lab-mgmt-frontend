@@ -100,7 +100,6 @@ const ProjectCreationWizard = ()=>{
     //wrapped em Error boundary
     return (
         <ErrorBoundary>
-        <Header />
         <Container maxWidth="md">
             <Paper elevation={3} sx={{ padding: 3, marginTop: 3 }}>
                 <Typography variant="h4" gutterBottom>

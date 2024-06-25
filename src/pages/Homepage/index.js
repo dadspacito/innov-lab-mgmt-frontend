@@ -11,20 +11,15 @@ import React, {useEffect} from 'react'
 import ProjectCarousel from '../../components/ProjectCarousel'
 import {GenerateMockProjects} from '../../Services/utils/GenerateMockProjects'
 import ErrorBoundary from '../../Services/utils/ErrorBoundary'
-import Header from '../../components/Header';
 import {Button, Box} from '@mui/material'
 import { usePageNavigation, } from '../../Services/utils/PageNavigation';
 import DescriptionSection from '../../components/DescriptionSection';
-import GenerateMockUsers from '../../Services/utils/GenerateMockUsers';
+//import GenerateMockUsers from '../../Services/utils/GenerateMockUsers';
 import { useState } from 'react'
-import { userStore } from '../../Services/Store/userStore';
-
-
+//import { userStore } from '../../Services/Store/userStore';
 //DADOS PARA TESTES
 // const mockUser = GenerateMockUsers();
 const projects = GenerateMockProjects();
-
-
 const Homepage = ()=>{
     const [user, setUser]= useState({});
     const [isUserOn, setUserOn] = useState(false);
@@ -36,40 +31,24 @@ const Homepage = ()=>{
         navigateToPage('createProject')
     }
 
-    //RETORNA USER vai buscar o user para fazer set
-    //cmd + k + c para commentar blocos de codigo
-    // useEffect(() => {
-    //     // Set the user to the first mock user with id 1
-    //     const firstUser = mockUser.find(user => user.id === 1);
-    //     if (firstUser) {
-    //         setUser(firstUser);
-    //     }
-    
-
-    // }, []);
-
-
-    //este foi so mock para ver se o user funcionava quando alterava o botão
-    // const handleUserOn = () => {
-    //     // Toggle the isUserOn state
-    //     setUserOn(prevState => !prevState);
-    // };
-    // useEffect(() => {
-    //     console.log('Homepage isUserOn state:', isUserOn);
-    // }, [isUserOn]);
-
-
-
     return (
         <>
-        <Box sx={{ padding: '20px' }}> {/* Add some padding to the main content area */}
+        <Box sx={{ padding: '50px' }}> {/* Add some padding to the main content area */}
             <ErrorBoundary fallback="There was an error rendering the description component">
                 <DescriptionSection />
             </ErrorBoundary>
-            <ErrorBoundary fallback="There was an error rendering the carousel component">
-                <ProjectCarousel projects={projects} isUserOn = {isUserOn}/>
-            </ErrorBoundary>
-            <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+        <Box 
+            sx={{ 
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Light shadow with slight blur
+            borderRadius: '8px', // Optional: adds rounded corners to the container
+            overflow: 'visible', // Ensures content within the container respects the rounded corners
+            marginTop: '20px' // Optional: add some spacing above the carousel
+            }}>
+        <ErrorBoundary fallback="There was an error rendering the carousel component">
+          <ProjectCarousel projects={projects} isUserOn={isUserOn} />
+        </ErrorBoundary>
+        </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '50px' , padding:'15px'}}>
                 <Button onClick={handleViewAllProjects} variant="contained" color="primary" sx={{ marginRight: '10px' }}>
                     View All Projects
                 </Button>
