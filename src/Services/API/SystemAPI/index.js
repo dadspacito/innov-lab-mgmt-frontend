@@ -21,5 +21,6 @@ export const SystemAPI={
             catch (error){
                 console.error('something went wrong with the try method');
             }
-        }
+        },
+        
 }
