@@ -38,7 +38,7 @@ const ProjectCreationWizard = ()=>{
         //criador-quando se carrega na criação associa-se logo este user 
         startDate:'',
         endDate:'',
-        //estado que é planning ou ready
+        //estado que é planning ou ready (set state)
     })
 
     //falta mudar o handleChange para ter materials e members nos fields 
@@ -100,7 +100,6 @@ const ProjectCreationWizard = ()=>{
     //wrapped em Error boundary
     return (
         <ErrorBoundary>
-        <Header />
         <Container maxWidth="md">
             <Paper elevation={3} sx={{ padding: 3, marginTop: 3 }}>
                 <Typography variant="h4" gutterBottom>

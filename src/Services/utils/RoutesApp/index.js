@@ -11,12 +11,20 @@ import RecoverPassword from "../../../pages/RecoverPassword";
 import MaterialsList from "../../../pages/ProjectMaterials";
 import Header from "../../../components/Header";
 import ProjectPage from "../../../pages/ProjectPage";
+import { userStore } from "../../Store/userStore";
+import Activation from "../../../pages/ActivateAccount";
+import ResetPassword from "../../../pages/ResetPassword";
 
 
 function RoutesApp(){
+    const user = userStore((state)=>state.user);
+    const isUserLoggedIn = user && user.nickname; // Adjust the condition based on your user's structure
+    console.log(user);
+
+    //o nickname pode sair, é so o {...user}
     return(
         <BrowserRouter>
-        <Header />
+        <Header isUserOn={isUserLoggedIn} userName={isUserLoggedIn ? user.nickname : ""} user ={isUserLoggedIn ? { ...user } : null} />
         <Routes>
             <Route path='/' element ={<Homepage/>}/>        
             <Route path="/registry" element={<RegistryForm/>} />
@@ -28,6 +36,8 @@ function RoutesApp(){
             <Route path ='/recoverpassword' element = {<RecoverPassword />}/>
             <Route path ='/materialsPage' element = {<MaterialsList/>}/>
             <Route path = '/projectPage' element = {<ProjectPage/>} />
+            <Route path ="/users/activations/:emailtoken" element={<Activation />} />
+            <Route path = "/reset-password/:emailtoken" element ={<ResetPassword />}/>
       </Routes>
         </BrowserRouter>
     )

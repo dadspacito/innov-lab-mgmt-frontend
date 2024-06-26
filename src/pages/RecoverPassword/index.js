@@ -3,38 +3,40 @@ import { TextField, Button, Box, Typography, Modal, Alert,IconButton } from '@mu
 import  GenerateMockUsers  from '../../Services/utils/GenerateMockUsers'; // Import your mock users for email verification
 import { usePageNavigation, } from '../../Services/utils/PageNavigation';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { UserAPI } from '../../Services/API/UserAPI';
+import { OneK } from '@mui/icons-material';
 
 // Mock users for demonstration
-const mockUsers = GenerateMockUsers();
+//const mockUsers = GenerateMockUsers();
 
 
 const RecoverPassword = () => {
     const [email, setEmail] = useState('');
-    const [emailExists, setEmailExists] = useState(null);
+    //modal é para avisar que foi enviado um email de reset password
     const [showModal, setShowModal] = useState(false);
     const [error, setError] = useState(null);
     const navigateToPage = usePageNavigation();
-
-   useEffect(() => {
-        console.log(mockUsers);
-    }, []);
 
     const handleChange = (event) => {
         setEmail(event.target.value);
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // Check if the email exists in the mock users
-        const user = mockUsers.find(user => user.email === email);
-        if (user) {
-            setEmailExists(true);
-            setShowModal(true);
-            setError(null);
-            navigateToPage('login');
-        } else {
-            setEmailExists(false);
-            setError("The provided email does not exist.");
+        setError(null); // Clear any previous errors
+
+        try {
+            const success = await UserAPI.RecoverPassword(email);
+            if (success) {
+                // If request is successful, show the success modal
+                setShowModal(true);
+            } else {
+                // If the API returns false, it means the email was not found or another error occurred
+                setError('Email does not exist or could not be sent.');
+            }
+        } catch (error) {
+            // Handle unexpected errors (network issues, etc.)
+            setError('An unexpected error occurred. Please try again later.');
         }
     }
 
