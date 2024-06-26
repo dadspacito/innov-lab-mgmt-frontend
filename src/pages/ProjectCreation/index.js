@@ -38,7 +38,7 @@ const ProjectCreationWizard = ()=>{
         //criador-quando se carrega na criação associa-se logo este user 
         startDate:'',
         endDate:'',
-        //estado que é planning ou ready
+        //estado que é planning ou ready (set state)
     })
 
     //falta mudar o handleChange para ter materials e members nos fields 
