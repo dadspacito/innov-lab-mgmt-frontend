@@ -1,35 +1,82 @@
-/* ProjectDiv.css */
 .projectCard {
-    /* Add styles to make it look like a card */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: fit-content;
-    display: inline-block;
+  /* Add styles to make it look like a card */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: calc(100% - 40px); /* Ensure it takes full width minus padding and margin */
+  display: inline-block;
+  transition: box-shadow 0.3s ease-in-out;
+}
 
+.projectCard:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.projectCard.inProgress {
+  background-color: #e0ffe0; /* Light green background for IN_PROGRESS state */
+}
+
+.projectCard h2 {
+  /* Styles for the title */
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+
+.projectCard p {
+  /* Styles for the description */
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-size: 1em;
+  color: #666;
+}
+
+.projectTags {
+  margin-bottom: 15px;
+}
+
+.projectInterests, .projectSkills {
+  margin: 5px 0;
+  font-size: 0.9em;
+}
+
+.projectInterests span, .projectSkills span {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .projectCard {
+      width: calc(100% - 20px); /* Adjust width for tablets */
+      padding: 15px;
   }
-  
+
   .projectCard h2 {
-    /* Styles for the title */
-    margin-bottom: 5px;
+      font-size: 1.4em;
   }
-  
+
   .projectCard p {
-    /* Styles for the description */
-    margin-top: 5px;
+      font-size: 0.9em;
   }
-  /* Responsive styles */
+}
+
 @media only screen and (max-width: 600px) {
-    .projectCard {
-        /* Adjust styles for smaller screens */
-        width: calc(100% - 20px); /* Take full width minus margins */
-        margin: 10px 0; /* Adjust margin */
-    }
+  .projectCard {
+      /* Adjust styles for smaller screens */
+      width: calc(100% - 20px); /* Take full width minus margins */
+      margin: 10px 0; /* Adjust margin */
+      padding: 10px;
+  }
+
+  .projectCard h2 {
+      font-size: 1.2em;
+  }
+
+  .projectCard p {
+      font-size: 0.8em;
+  }
 }
-.project-tags{
-  
-}
-  

@@ -24,8 +24,6 @@ import { userStore } from "../../Services/Store/userStore";
 const Header =({isUserOn, userName, user})=>{
     const navigateToPage = usePageNavigation();
     const navigate = useNavigate();
-    
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [showMenu, setShowMenu] = useState(true); // State to control menu visibility
     const [showIcon, setShowIcon] = useState(false);
@@ -54,12 +52,6 @@ const Header =({isUserOn, userName, user})=>{
       // Cleanup event listener on component unmount
       return () => window.removeEventListener('resize', handleResize);
   }, []); // Empty dependency array ensures the effect runs only once on component mount
-  useEffect(()=>{
-    console.log('a vir do header');
-    console.log(isUserOn);
-    
-  }, [isUserOn])
-
     const handleMenuClick = (event) => {
         console.log(event.currentTarget);
         console.log(event)

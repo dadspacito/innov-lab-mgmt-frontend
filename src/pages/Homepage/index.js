@@ -9,21 +9,26 @@
  */
 import React, {useEffect} from 'react'
 import ProjectCarousel from '../../components/ProjectCarousel'
-import {GenerateMockProjects} from '../../Services/utils/GenerateMockProjects'
+//import {GenerateMockProjects} from '../../Services/utils/GenerateMockProjects'
 import ErrorBoundary from '../../Services/utils/ErrorBoundary'
 import {Button, Box} from '@mui/material'
 import { usePageNavigation, } from '../../Services/utils/PageNavigation';
 import DescriptionSection from '../../components/DescriptionSection';
 //import GenerateMockUsers from '../../Services/utils/GenerateMockUsers';
 import { useState } from 'react'
+//import { ProjectAPI } from '../../Services/API/ProjectAPI';
 //import { userStore } from '../../Services/Store/userStore';
 //DADOS PARA TESTES
 // const mockUser = GenerateMockUsers();
-const projects = GenerateMockProjects();
+//const projects = GenerateMockProjects();
 const Homepage = ()=>{
     const [user, setUser]= useState({});
-    const [isUserOn, setUserOn] = useState(false);
+    //const [isUserOn, setUserOn] = useState(false);
+    //set state que é um array que recebe os projetos basic
+    
     const navigateToPage = usePageNavigation();
+    //use state que vai buscar os projetos 
+
     const handleViewAllProjects = ()=>{
         navigateToPage('allProjects');
     }
@@ -45,7 +50,7 @@ const Homepage = ()=>{
             marginTop: '20px' // Optional: add some spacing above the carousel
             }}>
         <ErrorBoundary fallback="There was an error rendering the carousel component">
-          <ProjectCarousel projects={projects} isUserOn={isUserOn} />
+          <ProjectCarousel/>
         </ErrorBoundary>
         </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '50px' , padding:'15px'}}>

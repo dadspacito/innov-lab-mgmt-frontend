@@ -19,7 +19,6 @@ import ResetPassword from "../../../pages/ResetPassword";
 function RoutesApp(){
     const user = userStore((state)=>state.user);
     const isUserLoggedIn = user && user.nickname; // Adjust the condition based on your user's structure
-    console.log(user);
 
     //o nickname pode sair, é so o {...user}
     return(
