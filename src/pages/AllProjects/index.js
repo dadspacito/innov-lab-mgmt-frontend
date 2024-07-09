@@ -26,7 +26,7 @@ const ProjectList = () => {
 
     const handleSearch = (query) => {
         setSearchQuery(query);
-        //setPage(1); // Reset page to 1 when performing a new search
+        setPage(1); // Reset page to 1 when performing a new search
     };
 
     const handleSearchTypeChange = (type) => {
@@ -36,16 +36,28 @@ const ProjectList = () => {
 
     const startIndex = (page - 1) * pageSize;
 
-    const visibleProjects = searchQuery ? projects.filter(project => {
+    const filteredProjects = searchQuery ? projects.filter(project => {
         if (searchType === 'name') {
             return project.name.toLowerCase().includes(searchQuery.toLowerCase());
         } else if (searchType === 'tags') {
-            return project.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+         // Handle case where project.tags is not iterable
+         if (!Array.isArray(project.tags)) {
+            return false; // or handle appropriately based on your logic
         }
-        return true; // Default to returning all projects if searchType is not recognized
+        // Rewrite without using Array.prototype.some()
+        let found = false;
+        for (let tag of project.tags) {
+            if (tag.toLowerCase().includes(searchQuery.toLowerCase())) {
+                found = true;
+                break;
+            }
+        }
+        return found;
+        }
+        return true; // Return all projects if search type is not recognized
     }) : projects;
 
-    const pageCount = Math.ceil(visibleProjects.length / pageSize);
+    
 
     if (!Array.isArray(projects)) {
         return <div>No projects available</div>;
@@ -53,16 +65,14 @@ const ProjectList = () => {
     if (loading) {
         return <div>Loading...</div>;
     }
+    const visibleProjects = filteredProjects.slice(startIndex, startIndex + pageSize);
+    const pageCount = Math.ceil(visibleProjects.length / pageSize);
 
     return (
         <>
             <div className="project-list-container">
                 <div className="project-search-container">
-                    <SearchField data={projects} onSearch={handleSearch} />
-                    <select value={searchType} onChange={(e) => handleSearchTypeChange(e.target.value)} className="search-selector">
-                        <option value="name">Search by Name</option>
-                        <option value="tags">Search by Tags</option>
-                    </select>
+                    <SearchField onSearch={handleSearch} onTypeChange={handleSearchTypeChange} />
                 </div>
                 <div className="project-list-wrapper">
                     <h2>Project List</h2>
