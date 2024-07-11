@@ -58,9 +58,9 @@ const ProjectCarousel = () => {
     };
     const isUserLoggedIn = userToken !== "";
     //onClick que redireciona para a página do projeto 
-    // const handleProjectClick = (project) => {
-    //     navigate('/projectPage', { state: { project } });
-    // };
+    const handleProjectClick = (project) => {
+        navigate('/projectPage', { state: { project } });
+    };
     if (loading) {
         return <div>Loading...</div>; // Render a loading indicator while data is being fetched
     }

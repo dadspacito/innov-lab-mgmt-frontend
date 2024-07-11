@@ -3,19 +3,30 @@ import {
     Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Fab, Modal, Box, useMediaQuery, Select, MenuItem, FormControl, InputLabel, Button, IconButton, Grid, TextField
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import GenerateMockMaterials from '../../Services/utils/GenerateMockMaterials';
+//import GenerateMockMaterials from '../../Services/utils/GenerateMockMaterials';
 import MaterialCreation from '../../components/MaterialCreation';
 import { useTheme } from '@mui/material/styles';
 import './style.css'; // Import external CSS for styling
+import { MaterialAPI } from '../../Services/API/MaterialAPI';
+import {userStore} from '../../Services/Store/userStore';
 
-const mockMaterials = GenerateMockMaterials();
+//const mockMaterials = GenerateMockMaterials();
 
 const MaterialsList = () => {
+    const userToken = userStore((state) => state.userToken);
     const [openModal, setOpenModal] = useState(false);
-    const [materials, setMaterials] = useState(mockMaterials.materials);
+    const [materials, setMaterials] = useState([]);
     const [filterType, setFilterType] = useState('All'); // State to manage the selected filter
-    const [filteredMaterials, setFilteredMaterials] = useState(materials);
+    //const [filteredMaterials, setFilteredMaterials] = useState(materials);
     const [searchQuery, setSearchQuery] = useState(''); // State for search query
+
+    useEffect(()=>{
+        MaterialAPI.GetAllMaterials(userToken).then(data=>{
+            setMaterials(data);
+        })
+        console.log(materials);
+        console.log(userToken);
+    },[])
 
     // Function to handle modal opening
     const handleOpenModal = () => setOpenModal(true);
@@ -24,11 +35,11 @@ const MaterialsList = () => {
     const handleCloseModal = () => setOpenModal(false);
 
     // Function to add new material to the list
-    const addMaterial = (newMaterial) => {
-        const newMaterialWithId = { ...newMaterial, id: materials.length + 1 };
-        setMaterials(prevMaterials => [...prevMaterials, newMaterialWithId]);
-        setFilteredMaterials(prevMaterials => [...prevMaterials, newMaterialWithId]); // Update filtered materials too
-    };
+    // const addMaterial = (newMaterial) => {
+    //     const newMaterialWithId = { ...newMaterial, id: materials.length + 1 };
+    //     setMaterials(prevMaterials => [...prevMaterials, newMaterialWithId]);
+    //     setFilteredMaterials(prevMaterials => [...prevMaterials, newMaterialWithId]); // Update filtered materials too
+    // };
 
     // Handle filter type change
     const handleFilterTypeChange = (event) => {
@@ -37,19 +48,19 @@ const MaterialsList = () => {
     };
 
     // Filter and search materials based on the selected filter type and search query
-    useEffect(() => {
-        let updatedMaterials = materials;
-        //esta função nao esta a fazer update a lista
-        if (filterType !== 'All') {
-            updatedMaterials = updatedMaterials.filter(material => material.type === filterType);
-        }
-        if (searchQuery) {
-            updatedMaterials = updatedMaterials.filter(material =>
-                material.name.toLowerCase().includes(searchQuery.toLowerCase())
-            );
-        }
-        setFilteredMaterials(updatedMaterials);
-    }, [filterType, searchQuery, materials]);
+    // useEffect(() => {
+    //     let updatedMaterials = materials;
+    //     //esta função nao esta a fazer update a lista
+    //     if (filterType !== 'All') {
+    //         updatedMaterials = updatedMaterials.filter(material => material.type === filterType);
+    //     }
+    //     if (searchQuery) {
+    //         updatedMaterials = updatedMaterials.filter(material =>
+    //             material.name.toLowerCase().includes(searchQuery.toLowerCase())
+    //         );
+    //     }
+    //     setFilteredMaterials(updatedMaterials);
+    // }, [filterType, searchQuery, materials]);
 
     // Use MUI's useMediaQuery to make the modal responsive
     const theme = useTheme();
@@ -115,7 +126,7 @@ const MaterialsList = () => {
                         p: 4,
                     }}
                 >
-                    <MaterialCreation handleClose={handleCloseModal} addMaterial={addMaterial} />
+                    {/* <MaterialCreation handleClose={handleCloseModal} addMaterial={addMaterial} /> */}
                 </Box>
             </Modal>
 
@@ -135,17 +146,18 @@ const MaterialsList = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {filteredMaterials.map((material) => (
+                        {materials.map((material) => (
                             <TableRow key={material.id}>
                                 <TableCell>{material.id}</TableCell>
                                 <TableCell>{material.name}</TableCell>
                                 <TableCell>{material.brand}</TableCell>
                                 <TableCell>{material.type}</TableCell>
-                                <TableCell>{material.identifier}</TableCell>
+                                <TableCell>{material.serialNumber}</TableCell>
                                 <TableCell>{material.supplier}</TableCell>
                                 <TableCell>{material.supplierContact}</TableCell>
-                                <TableCell>{material.amount}</TableCell>
-                                <TableCell>{material.comments}</TableCell>
+                                <TableCell>{material.quantity}</TableCell>
+                                <TableCell>{material.description}</TableCell>
+                                <TableCell>{material.observations}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

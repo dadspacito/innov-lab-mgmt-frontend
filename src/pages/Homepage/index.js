@@ -9,18 +9,13 @@
  */
 import React, {useEffect} from 'react'
 import ProjectCarousel from '../../components/ProjectCarousel'
-//import {GenerateMockProjects} from '../../Services/utils/GenerateMockProjects'
 import ErrorBoundary from '../../Services/utils/ErrorBoundary'
 import {Button, Box} from '@mui/material'
 import { usePageNavigation, } from '../../Services/utils/PageNavigation';
 import DescriptionSection from '../../components/DescriptionSection';
-//import GenerateMockUsers from '../../Services/utils/GenerateMockUsers';
+
 import { useState } from 'react'
-//import { ProjectAPI } from '../../Services/API/ProjectAPI';
-//import { userStore } from '../../Services/Store/userStore';
-//DADOS PARA TESTES
-// const mockUser = GenerateMockUsers();
-//const projects = GenerateMockProjects();
+
 const Homepage = ()=>{
     const [user, setUser]= useState({});
     //const [isUserOn, setUserOn] = useState(false);
@@ -28,14 +23,12 @@ const Homepage = ()=>{
     
     const navigateToPage = usePageNavigation();
     //use state que vai buscar os projetos 
-
     const handleViewAllProjects = ()=>{
         navigateToPage('allProjects');
     }
     const handleCreateNewProject = ()=>{
         navigateToPage('createProject')
     }
-
     return (
         <>
         <Box sx={{ padding: '50px' }}> {/* Add some padding to the main content area */}

@@ -1,43 +1,37 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
-/* ProjectCarousel.css */
+
+/* Container for the carousel */
 .carouselContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Align items horizontally at the center */
+    justify-content: center; /* Center items horizontally */
     align-content: center;
 }
+
+/* Wrapper for individual projects */
 .projectWrapper {
-    /* Styles for the project wrapper */
     display: flex;
-    justify-content: center; /* Horizontally center the project */
-  }
-/* Media query for screens smaller than 600px */
-@media screen and (max-width: 600px) {
-    .carouselContainer {
-      /* Adjust styles for smaller screens */
-      flex-direction: column; /* Display items vertically */
-    }
-  }
-  .carouselContainer .projectWrapper {
+    justify-content: center; /* Center project horizontally */
     transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
 }
 
-.carouselContainer .projectWrapper:hover {
+/* Hover effects for the project wrapper */
+.projectWrapper:hover {
     transform: scale(1.05); /* Slightly enlarge the element */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Add a shadow */
     filter: brightness(1.2); /* Increase brightness */
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
 }
 
-/* Optional: Add a subtle border or change in background color */
-.carouselContainer .projectWrapper:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  filter: brightness(1.2);
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  background-color: #f8f9fa;
+/* Media query for screens smaller than 600px */
+@media screen and (max-width: 600px) {
+    .carouselContainer {
+        flex-direction: column; /* Display items vertically */
+    }
 }
-/* Custom styling for the arrows */
+
 /* Custom styling for the arrows */
 .slick-prev,
 .slick-next {
@@ -55,26 +49,25 @@
     transform: translateY(-50%); /* Adjust for perfect centering */
 }
 
+/* Arrow hover effects */
 .slick-prev:hover,
 .slick-next:hover {
     background-color: rgba(0, 0, 0, 0.7); /* Darker on hover */
+    cursor: pointer;
 }
 
+/* Position the left arrow */
 .slick-prev {
     left: -25px; /* Move the left arrow outside the main container */
 }
 
+/* Position the right arrow */
 .slick-next {
     right: -25px; /* Move the right arrow outside the main container */
 }
 
-/* Optional: Add hover effects to indicate interactability */
+/* Arrow hover effects for better interactability */
 .slick-prev:hover,
 .slick-next:hover {
-    cursor: pointer;
     background-color: rgba(0, 0, 0, 0.8); /* Slightly darker on hover */
 }
-
-  
-  
-
