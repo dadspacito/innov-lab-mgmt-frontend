@@ -30,38 +30,19 @@ const Header =({isUserOn, userName, user})=>{
     const anchorRef = useRef(null);
     const mockUserPicture = 'https://static-00.iconduck.com/assets.00/avatar-default-icon-2048x2048-h6w375ur.png'; // Placeholder image
     const logout = userStore((state)=>state.clearUser);
-
-    //aqui ha uma função que ao verificar se o user está logged in, retorna o set isLoggedIn como true ou false
     useEffect(() => {
       const handleResize = () => {
-          // Check the window width and set showMenu accordingly
           const width = window.innerWidth;
             setShowMenu(width > 768);
             setShowIcon(width < 769);
-            //aqui tem que se definir a ref logo quando faz resize
-
       };
-       // Initial check on component mount
        handleResize();
-
-      // Add event listener for window resize
       window.addEventListener('resize', handleResize);
-
-     
-
-      // Cleanup event listener on component unmount
       return () => window.removeEventListener('resize', handleResize);
-  }, []); // Empty dependency array ensures the effect runs only once on component mount
+  }, []);
     const handleMenuClick = (event) => {
-        console.log(event.currentTarget);
-        console.log(event)
         setAnchorEl(anchorRef.current);
-        console.log(anchorEl);
-        
-        
-        //acho que é preciso aqui uma condicional que verifique que o tamanho de pagina é abaixo de x e abra mesmo nesse tamanho
         setShowMenu(true);
-
     };
 
     const handleClose = () => {

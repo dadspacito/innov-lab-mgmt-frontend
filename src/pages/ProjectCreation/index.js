@@ -18,27 +18,24 @@ import ProjectMembers from '../../components/ProjectCreationWizard/ProjectMember
 import ProjectResources from '../../components/ProjectCreationWizard/ProjectResources';
 import ProjectDates from '../../components/ProjectCreationWizard/ProjectDates';
 import { Button, Box, Container, Typography, Paper } from '@mui/material';
-
-
 import Header from '../../components/Header';
 import ErrorBoundary from './../../Services/utils/ErrorBoundary'
+import { userStore } from '../../Services/Store/userStore';
 
 const ProjectCreationWizard = ()=>{
+    const userID = userStore((state)=>state.userID)
     const [step, setStep] =  useState(1);
     const [formData, setFormData] = useState({
-        //editar projeto quando se cria na pagina do projeto 
         name:'',
         description:'',
-        location:'',//este é uma int/id de uma localização da tabela de localizações
-        keywords:[],//são as tags que depois se associam as chips dos projetos
-        members:[],//array de ids atraves de users disponiveis em base de dados (que não estejam em projetos )
-        //depois da adição dos membros, perguntar se quer gravar o projeto- status do projecto fica como planning 
-        //executionPlan:'',plano de execução, pode sair mais tarde, é necessário sequer?
-        materials:[], //ids de materiais da tabela de materiais 
-        //criador-quando se carrega na criação associa-se logo este user 
+        workplace:'',//este é uma int/id de uma localização da tabela de localizações
+        projectInterests:[],
+        projectSkills:[],
+        projectMembers:[],//array de ids atraves de users disponiveis em base de dados (que não estejam em projetos )
+        projectMaterials:[], //ids de materiais da tabela de materiais 
+        projectManager:userID,
         startDate:'',
         endDate:'',
-        //estado que é planning ou ready (set state)
     })
 
     //falta mudar o handleChange para ter materials e members nos fields 
@@ -72,7 +69,7 @@ const ProjectCreationWizard = ()=>{
         setStep(step-1);
     }
     const handleSubmit = ()=>{
-        //função de handle submit
+        console.log(formData);
     }
     //aqui faz se um switch que consoante o step onde estivermos, faz render aos componentes que se quer
     const renderStepComponent=()=>{

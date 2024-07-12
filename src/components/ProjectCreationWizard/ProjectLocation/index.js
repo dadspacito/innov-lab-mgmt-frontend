@@ -1,25 +1,32 @@
-import React, { useEffect } from 'react';
-import GenerateMockLocations from '../../../Services/utils/GenerateMockLocations';
+import React, { useState, useEffect } from 'react';
+import {LocationAPI} from '../../../Services/API/LocationAPI'
 import './style.css'; // Ensure you import the CSS file
 
 // Array of locations
-const mockLocations = GenerateMockLocations();
 
 const ProjectLocations = ({ formData, onChange }) => {
+    const [workplaces,setWorkplaces] = useState([]);
+    const [loading, setLoading] = useState(true);
     
     useEffect(() => {
-        console.log(mockLocations);
+        LocationAPI.GetLocations().then(data =>{
+            setWorkplaces(data);
+            setLoading(false);
+            console.log(workplaces)
+        })
     }, []);
-
+    if (loading) {
+        return <div>Loading...</div>; // Render a loading indicator while data is being fetched
+    }
     return (
         <div className='wrapper-div'>
-            {mockLocations.map(location => (
+            {workplaces.map(workplace => (
                 <div 
-                    key={location.id} 
-                    className={`wrapper-location-div ${formData.location === location.location ? 'selected' : ''}`}
-                    onClick={() => onChange('location', location.location)}
+                    key={workplace.id} 
+                    className={`wrapper-location-div ${formData.workplace === workplace.workplace ? 'selected' : ''}`}
+                    onClick={() => onChange('workplace', workplace.workplace)}
                 >
-                    {location.location}
+                    {workplace.workplace}
                 </div>
             ))}
         </div>

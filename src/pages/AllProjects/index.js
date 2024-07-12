@@ -8,7 +8,7 @@ import { ProjectAPI } from '../../Services/API/ProjectAPI';
 const ProjectList = () => {
     const [page, setPage] = useState(1);
     const [projects, setProjects] = useState([]);
-    const [pageSize, setPageSize] = useState(2);
+    const [pageSize, setPageSize] = useState(3);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
     const [searchType, setSearchType] = useState('name'); // Default search type

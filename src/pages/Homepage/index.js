@@ -1,28 +1,18 @@
-/**
- * esta vai ser a página que serve de dashboard para os projectos
- * LANDING PAGE
- * tem header
- * carrossel de projetos 
- * botão que leva à pagina de projetos
- * campo de busca 
- * 
- */
 import React, {useEffect} from 'react'
 import ProjectCarousel from '../../components/ProjectCarousel'
 import ErrorBoundary from '../../Services/utils/ErrorBoundary'
 import {Button, Box} from '@mui/material'
 import { usePageNavigation, } from '../../Services/utils/PageNavigation';
 import DescriptionSection from '../../components/DescriptionSection';
-
+import WebSocketClient from "../../components/Websocket"; 
+import { userStore } from '../../Services/Store/userStore'
 import { useState } from 'react'
 
 const Homepage = ()=>{
+    WebSocketClient(); 
+    const notifications = userStore((state) => state.notifications); 
     const [user, setUser]= useState({});
-    //const [isUserOn, setUserOn] = useState(false);
-    //set state que é um array que recebe os projetos basic
-    
     const navigateToPage = usePageNavigation();
-    //use state que vai buscar os projetos 
     const handleViewAllProjects = ()=>{
         navigateToPage('allProjects');
     }

@@ -4,7 +4,7 @@
 export const LocationAPI={
     GetLocations : async()=>{
         try{
-            const response = await fetch ('https://localhost:8443/innovlab/api/locations',{
+            const response = await fetch ('https://localhost:8443/innovlab/api/workplace',{
                 method:'GET',
                 headers:{
                     'Accept': '*/*',

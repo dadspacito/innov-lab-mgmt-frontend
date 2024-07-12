@@ -90,7 +90,6 @@ const RegistryForm = () =>{
 
 
     useEffect(() => {
-        //vai buscar as localizações à db
         const fetchLocations = async () => {
             try {
                 const response = await LocationAPI.GetLocations();
